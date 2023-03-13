@@ -15,17 +15,33 @@ import GradeRegist from "./pages/teacher/GradeRegist";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { QueryClient } from "react-query";
-
 import { QueryClientProvider } from "react-query";
 import GlobalStyles from "./styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
+import CreateUser from "./pages/master/CreateUser";
+import ManagementUser from "./pages/master/ManagementUser";
+import FindId from "./pages/FindId";
+import FindPassword from "./pages/FindPassword";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Login />,
         errorElement: <ErrorPage />,
+        children: [
+            { path: "findid", element: <FindId /> },
+            { path: "findpassword", element: <FindPassword /> },
+        ],
+    },
+    {
+        path: "/master",
+        element: <App />,
+        errorElement: <ErrorPage />,
+        children: [
+            { path: "create", element: <CreateUser /> },
+            { path: "management", element: <ManagementUser /> },
+        ],
     },
     {
         path: "/student",
