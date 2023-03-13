@@ -15,7 +15,8 @@ import GradeRegist from "./pages/teacher/GradeRegist";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { QueryClient } from "react-query";
-import { QueryClientProvider } from "react-query/types/react";
+
+import { QueryClientProvider } from "react-query";
 import GlobalStyles from "./styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
