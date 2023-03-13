@@ -2,12 +2,13 @@ import { DefaultTheme } from "styled-components";
 
 const theme: DefaultTheme = {
     colors: {
-        light: "#fff",
-        dark: "#000",
+        white: "#fff",
+        black: "#000",
+        main1: "283c43",
+        main2: "d8f0ea",
+        main3: "398c7c",
     },
-    fonts: {
-        body: "Helvetica Neue, Helvetica, Arial, sans-serif",
-    },
+
     fontSizes: {
         small: "12px",
         medium: "14px",
