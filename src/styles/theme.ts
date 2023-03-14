@@ -4,9 +4,9 @@ const theme: DefaultTheme = {
     colors: {
         white: "#fff",
         black: "#000",
-        main1: "283c43",
-        main2: "d8f0ea",
-        main3: "398c7c",
+        mainColor: "#283c43",
+        menuColor: "#d8f0ea",
+        pointColor: "#398c7c",
     },
 
     fontSizes: {
