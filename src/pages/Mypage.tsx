@@ -4,7 +4,7 @@ import TabMenu from "../components/TabMenu";
 const Mypage = () => {
     return (
         <>
-            <TabMenu />
+            <TabMenu menu={"마이페이지"} />
             <MypageContainer>
                 <h3>비밀번호 수정</h3>
                 <form>
