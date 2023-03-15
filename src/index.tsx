@@ -25,69 +25,69 @@ import GradeList from "./pages/teacher/GradeList";
 import AllAverage from "./pages/teacher/AllAverage";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/findid",
-    element: <FindId />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/findpassword",
-    element: <FindPassword />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/master",
-    element: <App />,
-    errorElement: <ErrorPage />,
-    children: [
-      { path: "create", element: <CreateUser /> },
-      { path: "management", element: <ManagementUser /> },
-    ],
-  },
-  {
-    path: "/student",
-    element: <App />,
-    errorElement: <ErrorPage />,
-    children: [
-      { path: "myaverage", element: <Myaverage /> },
-      { path: "gradelist", element: <Gradelist /> },
-      { path: "feedback", element: <Feedback /> },
-      { path: "feedback/:titleId", element: <FeedbackDetail /> },
-      { path: "mypage", element: <Mypage /> },
-    ],
-  },
-  {
-    path: "/teacher",
-    element: <App />,
-    errorElement: <ErrorPage />,
-    children: [
-      { path: "allaverage", element: <AllAverage /> },
-      { path: "gradelist", element: <GradeList /> },
-      { path: "feedback", element: <Feedback /> },
-      { path: "feedback/write", element: <FeedbackWrite /> },
-      { path: "feedback/:titleId", element: <FeedbackDetail /> },
-      { path: "mypage", element: <Mypage /> },
-    ],
-  },
+    {
+        path: "/",
+        element: <Login />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/findid",
+        element: <FindId />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/findpassword",
+        element: <FindPassword />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/master",
+        element: <App />,
+        errorElement: <ErrorPage />,
+        children: [
+            { path: "create", element: <CreateUser /> },
+            { path: "management", element: <ManagementUser /> },
+        ],
+    },
+    {
+        path: "/student",
+        element: <App />,
+        errorElement: <ErrorPage />,
+        children: [
+            { path: "myaverage", element: <Myaverage /> },
+            { path: "gradelist", element: <Gradelist /> },
+            { path: "feedback", element: <Feedback /> },
+            { path: "feedback/:titleId", element: <FeedbackDetail /> },
+            { path: "mypage", element: <Mypage /> },
+        ],
+    },
+    {
+        path: "/teacher",
+        element: <App />,
+        errorElement: <ErrorPage />,
+        children: [
+            { path: "allaverage", element: <AllAverage /> },
+            { path: "gradelist", element: <GradeList /> },
+            { path: "feedback", element: <Feedback /> },
+            { path: "feedback/write", element: <FeedbackWrite /> },
+            { path: "feedback/:titleId", element: <FeedbackDetail /> },
+            { path: "mypage", element: <Mypage /> },
+        ],
+    },
 ]);
 
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+    document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Provider store={store}>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </QueryClientProvider>
-  </Provider>
+    <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+            <ThemeProvider theme={theme}>
+                <GlobalStyles />
+                <RouterProvider router={router} />
+            </ThemeProvider>
+        </QueryClientProvider>
+    </Provider>
 );
