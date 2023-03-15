@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import TabMenu from "../components/TabMenu";
 
 const Mypage = () => {
     return (
         <>
+            <TabMenu />
             <MypageContainer>
                 <h3>비밀번호 수정</h3>
                 <form>
