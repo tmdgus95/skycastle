@@ -26,6 +26,8 @@ const Mypage = () => {
 };
 
 const MypageContainer = styled.div`
+    margin-top: 71px;
+    margin-left: 39px;
     h3 {
         font-weight: 700;
         font-size: 24px;
@@ -56,12 +58,16 @@ const MypageContainer = styled.div`
     form {
         display: flex;
         div:nth-child(1) {
+            margin-top: 45px;
             display: flex;
             flex-direction: column;
+            font-weight: 400;
+            font-size: 20px;
         }
         div:nth-child(2) {
             display: flex;
             flex-direction: column;
+            margin-top: 45px;
             margin-left: 61px;
             input:last-child {
                 text-align: right;
@@ -71,6 +77,7 @@ const MypageContainer = styled.div`
         label {
             height: 36px;
             line-height: 36px;
+            margin-left: 22px;
             margin-bottom: 21px;
         }
     }
