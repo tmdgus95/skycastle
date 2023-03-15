@@ -8,17 +8,6 @@ const theme: DefaultTheme = {
         menuColor: "#d8f0ea",
         pointColor: "#398c7c",
     },
-
-    fontSizes: {
-        small: "12px",
-        medium: "14px",
-        large: "16px",
-    },
-    space: {
-        small: "8px",
-        medium: "16px",
-        large: "24px",
-    },
 };
 
 export default theme;

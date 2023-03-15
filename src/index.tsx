@@ -29,10 +29,16 @@ const router = createBrowserRouter([
     path: "/",
     element: <Login />,
     errorElement: <ErrorPage />,
-    children: [
-      { path: "findid", element: <FindId /> },
-      { path: "findpassword", element: <FindPassword /> },
-    ],
+  },
+  {
+    path: "/findid",
+    element: <FindId />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/findpassword",
+    element: <FindPassword />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/master",
