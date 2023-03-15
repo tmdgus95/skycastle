@@ -13,10 +13,37 @@ export const SideBarContainer = styled.div`
     color: ${(props) => props.theme.colors.white};
 `;
 
+// 메인화면
+export const MainContentsContainer = styled.div`
+    width: 83%;
+`;
+
 // 헤더
 export const HeaderContainer = styled.div`
+    width: 100%;
     display: flex;
+    height: 112px;
+    padding: 35px;
+    justify-content: end;
+    span {
+        font-weight: 700;
+        font-size: 24px;
+        padding: 0 4px;
+    }
+    span:nth-child(2) {
+        padding-top: 5px;
+    }
+    div {
+        display: flex;
+    }
+    button {
+        padding: 0 13px;
+        font-weight: 500;
+        font-size: 24px;
+    }
 `;
+
+//탭메뉴
 
 //로그인
 export const LoginContainer = styled.div`
