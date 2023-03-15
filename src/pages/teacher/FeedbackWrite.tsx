@@ -1,23 +1,50 @@
 import styled from "styled-components";
+import Button from "../../components/UI/Button";
 
 const FeedbackWrite = () => {
     return (
         <FeedbackWriteContainer>
             <FeedbackWriteBox>
                 <FeedbackWriteHeader>
-                    <div>선생님</div>
-                    <div>글</div>
-                    <div>날짜</div>
+                    <p>선생님</p>
+                    <div style={{paddingRight:"120px"}}>
+                        <input
+                            type="text"
+                            style={{
+                                width: "650px",
+                                background: "#f3f3f3",
+                                borderRadius: "5px",
+                                textAlign: "left",
+                                paddingLeft:"23px"
+                            }}
+                            placeholder="제목을 입력해주세요."
+                        />
+                    </div>
+                    <p>날짜</p>
                 </FeedbackWriteHeader>
                 <FeedbackWriteBody>
                     <textarea
-                        cols={20}
-                        rows={50}
-                        style={{ width: "100%", height: "50%" }}
-                    >
-                        1234
-                    </textarea>
+                        style={{
+                            width: "80%",
+                            height: "100%",
+                            border: "1px solid #eee",
+                            background: "#f3f3f3",
+                            borderRadius: "5px",
+                            padding: "20px",
+                        }}
+                        placeholder="내용을 입력해주세요."
+                    ></textarea>
                 </FeedbackWriteBody>
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "end",
+                        padding: "0 100px",
+                        marginTop: "50px",
+                    }}
+                >
+                    <Button title="등록" />
+                </div>
             </FeedbackWriteBox>
         </FeedbackWriteContainer>
     );
@@ -26,34 +53,34 @@ const FeedbackWrite = () => {
 const FeedbackWriteContainer = styled.div`
     display: block;
     width: 1600px;
-    height: 85vh;
-    background-color: red;
+    height: 87.5vh;
 `;
 const FeedbackWriteBox = styled.div`
     position: relative;
     display: block;
     width: 80%;
-    height: 90%;
-    background-color: green;
+    height: 80%;
     margin: 100px auto;
     padding: 50px;
 `;
 const FeedbackWriteHeader = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
     width: 80%;
     height: 10%;
-    background-color: skyblue;
+    background: ${(props) => props.theme.colors.menuColor};
     margin: 0 auto;
-    margin-top: 50px;
-    border-bottom: 2px solid #000;
+    border-radius: 5px;
+    border-bottom: 1px solid #333;
 `;
 const FeedbackWriteBody = styled.div`
     width: 80%;
-    height: 50%;
+    height: 100%;
     margin: 0 auto;
-    margin-top: 150px;
-    border-bottom: 2px solid #000;
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 1px solid gray;
 `;
 
 export default FeedbackWrite;
