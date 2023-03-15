@@ -1,19 +1,15 @@
 import styled from "styled-components";
 
-interface IMenu {
-    title: string[];
+interface Props {
+    menu: string;
 }
 
-const TabMenus = ["학생현황"];
-
-const TabMenu = ({ menu }: any) => {
+const TabMenu = ({ menu }: Props) => {
     return (
         <TabMenContainer>
-            {TabMenus.map((tabmenu, i) => (
-                <TabMenContent key={i}>
-                    <p>{tabmenu}</p>
-                </TabMenContent>
-            ))}
+            <TabMenContent>
+                <p>{menu}</p>
+            </TabMenContent>
         </TabMenContainer>
     );
 };
