@@ -1,10 +1,8 @@
 import styled from "styled-components";
-
 // 전체 레이아웃
 export const FlexContainer = styled.div`
     display: flex;
 `;
-
 // 사이드바
 export const SideBarContainer = styled.div`
     width: 17%;
@@ -163,3 +161,5 @@ export const FindPasswordContainer = styled(LoginContainer)`
         right: 610px;
     }
 `;
+
+
