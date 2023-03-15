@@ -1,4 +1,3 @@
-import { Avatar } from "antd";
 import { HeaderContainer } from "../styles/Styles";
 import { BsFillPersonFill } from "react-icons/bs";
 

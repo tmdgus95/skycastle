@@ -16,11 +16,6 @@ export const MainContentsContainer = styled.div`
   width: 83%;
 `;
 
-// 메인화면
-export const MainContentsContainer = styled.div`
-  width: 83%;
-`;
-
 // 헤더
 export const HeaderContainer = styled.div`
   width: 100%;
