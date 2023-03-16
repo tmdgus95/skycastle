@@ -9,6 +9,40 @@ export const SideBarContainer = styled.div`
   height: 100vh;
   background-color: ${(props) => props.theme.colors.mainColor};
   color: ${(props) => props.theme.colors.white};
+  .sidebar-title {
+    height: 15vh;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 15vh;
+  }
+  .sidebar-menu {
+    background-color: ${(props) => props.theme.colors.mainColor};
+    color: ${(props) => props.theme.colors.white};
+    font-size: 17px;
+    font-weight: 400;
+    .ant-menu-title-content:hover {
+      color: ${(props) => props.theme.colors.white};
+    }
+    .ant-menu-submenu:hover {
+      color: ${(props) => props.theme.colors.white};
+      .ant-menu-submenu-arrow {
+        color: ${(props) => props.theme.colors.white};
+      }
+    }
+    .jbwCWW {
+      background-color: #495a5f;
+    }
+    .ant-menu-submenu-selected {
+      .ant-menu-submenu-title {
+        color: ${(props) => props.theme.colors.white};
+      }
+    }
+    .ant-menu-item-selected {
+      background-color: #495a5f;
+      color: ${(props) => props.theme.colors.white};
+    }
+  }
 `;
 
 // 메인화면

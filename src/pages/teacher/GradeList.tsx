@@ -5,6 +5,8 @@ import GradeRegist from "./GradeRegist";
 import TabPane from "antd/es/tabs/TabPane";
 import { GradeRegistListContainer } from "../../styles/TeacherStyles";
 import Search from "antd/es/input/Search";
+import moment from "moment";
+import dayjs from "dayjs";
 
 interface DataType {
   key: React.Key;
@@ -117,6 +119,8 @@ const GradeList = () => {
   const handleWriteChange = () => {
     setWrite(!write);
   };
+
+  const defaultMonth = moment(new Date()).format("YYYY/MM");
   return (
     <>
       {write ? (
@@ -124,7 +128,11 @@ const GradeList = () => {
       ) : (
         <>
           <GradeRegistListContainer>
-            <DatePicker picker="month" bordered={false} />
+            <DatePicker
+              defaultValue={dayjs(defaultMonth, "YYYY/MM")}
+              picker="month"
+              bordered={false}
+            />
             <Table
               className="t-grade"
               rowSelection={rowSelection}
@@ -135,7 +143,7 @@ const GradeList = () => {
                   <Search
                     placeholder="input search text"
                     onSearch={onSearch}
-                    style={{ width: 200 }}
+                    style={{ width: 150 }}
                   />
                   <button className="grade-bt" onClick={handleWriteChange}>
                     등록
