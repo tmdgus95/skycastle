@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { Table, Form, Input, Button } from "antd";
+import { Table, Form, Input, Button, DatePicker } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { GradeRegistContainer } from "../../styles/TeacherStyles";
+import Search from "antd/es/input/Search";
+import dayjs from "dayjs";
+import moment from "moment";
 
 interface DataType {
   key: React.Key;
@@ -25,81 +28,25 @@ const columns: ColumnsType<DataType> = [
         title: "듣기",
         dataIndex: "listening",
         key: "listening",
-        render: (text, record) => (
-          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 10 }}>
-            <Form.Item
-              name="listening"
-              rules={[
-                {
-                  required: true,
-                  message: "점수를 입력하세요!",
-                },
-              ]}
-            >
-              <Input placeholder="점수 입력" />
-            </Form.Item>
-          </Form>
-        ),
+        render: (text, record) => <Input style={{ width: 120 }} />,
       },
       {
         title: "독해",
         dataIndex: "reading",
         key: "reading",
-        render: (text, record) => (
-          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 10 }}>
-            <Form.Item
-              name="reading"
-              rules={[
-                {
-                  required: true,
-                  message: "점수를 입력하세요!",
-                },
-              ]}
-            >
-              <Input placeholder="점수 입력" />
-            </Form.Item>
-          </Form>
-        ),
+        render: (text, record) => <Input style={{ width: 120 }} />,
       },
       {
         title: "문법",
         dataIndex: "grammar",
         key: "grammar",
-        render: (text, record) => (
-          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 10 }}>
-            <Form.Item
-              name="grammar"
-              rules={[
-                {
-                  required: true,
-                  message: "점수를 입력하세요!",
-                },
-              ]}
-            >
-              <Input placeholder="점수 입력" />
-            </Form.Item>
-          </Form>
-        ),
+        render: (text, record) => <Input style={{ width: 120 }} />,
       },
       {
         title: "어휘",
         dataIndex: "vocabulary",
         key: "vocabulary",
-        render: (text, record) => (
-          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 10 }}>
-            <Form.Item
-              name="vocabulary"
-              rules={[
-                {
-                  required: true,
-                  message: "점수를 입력하세요!",
-                },
-              ]}
-            >
-              <Input placeholder="점수 입력" />
-            </Form.Item>
-          </Form>
-        ),
+        render: (text, record) => <Input style={{ width: 120 }} />,
       },
     ],
   },
@@ -163,7 +110,7 @@ interface Props {
 
 const GradeRegist = ({ write, handleWriteChange }: Props) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-
+  const onSearch = (value: string) => console.log(value);
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     console.log("selectedRowKeys changed: ", newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
@@ -173,14 +120,32 @@ const GradeRegist = ({ write, handleWriteChange }: Props) => {
     selectedRowKeys,
     onChange: onSelectChange,
   };
+
+  const defaultMonth = moment(new Date()).format("YYYY/MM");
   return (
     <GradeRegistContainer>
+      <DatePicker
+        defaultValue={dayjs(defaultMonth, "YYYY/MM")}
+        picker="month"
+        bordered={false}
+      />
       <Table
         className="t-grade"
         rowSelection={rowSelection}
         columns={columns}
         dataSource={data}
-        footer={() => <Button onClick={handleWriteChange}>닫기</Button>}
+        footer={() => (
+          <div className="flex justify-between">
+            <Search
+              placeholder="input search text"
+              onSearch={onSearch}
+              style={{ width: 150 }}
+            />
+            <button className="grade-bt" onClick={handleWriteChange}>
+              입력
+            </button>
+          </div>
+        )}
         pagination={{
           position: ["bottomCenter"],
           showSizeChanger: false,
