@@ -1,59 +1,65 @@
 import styled from "styled-components";
 import Button from "../../components/UI/Button";
+import TabMenu from "../../components/TabMenu";
 
 const FeedbackWrite = () => {
     return (
-        <FeedbackWriteContainer>
-            <FeedbackWriteBox>
-                <FeedbackWriteHeader>
-                    <p>선생님</p>
-                    <div style={{paddingRight:"120px"}}>
-                        <input
-                            type="text"
+        <>
+            <TabMenu menu="게시판" />
+            <FeedbackWriteContainer>
+                <FeedbackWriteBox>
+                    <FeedbackWriteHeader>
+                        <p>선생님</p>
+                        <div style={{ paddingRight: "120px" }}>
+                            <input
+                                type="text"
+                                style={{
+                                    width: "650px",
+                                    height: "35px",
+                                    background: "#f3f3f3",
+                                    borderRadius: "5px",
+                                    textAlign: "left",
+                                    paddingLeft: "23px",
+                                    outline: "none",
+                                }}
+                                placeholder="제목을 입력해주세요."
+                            />
+                        </div>
+                        <p>날짜</p>
+                    </FeedbackWriteHeader>
+                    <FeedbackWriteBody>
+                        <textarea
                             style={{
-                                width: "650px",
+                                width: "80%",
+                                height: "100%",
+                                border: "1px solid #eee",
                                 background: "#f3f3f3",
                                 borderRadius: "5px",
-                                textAlign: "left",
-                                paddingLeft:"23px"
+                                padding: "20px",
                             }}
-                            placeholder="제목을 입력해주세요."
-                        />
-                    </div>
-                    <p>날짜</p>
-                </FeedbackWriteHeader>
-                <FeedbackWriteBody>
-                    <textarea
+                            placeholder="내용을 입력해주세요."
+                        ></textarea>
+                    </FeedbackWriteBody>
+                    <div
                         style={{
-                            width: "80%",
-                            height: "100%",
-                            border: "1px solid #eee",
-                            background: "#f3f3f3",
-                            borderRadius: "5px",
-                            padding: "20px",
+                            display: "flex",
+                            justifyContent: "end",
+                            padding: "0 100px",
+                            marginTop: "50px",
                         }}
-                        placeholder="내용을 입력해주세요."
-                    ></textarea>
-                </FeedbackWriteBody>
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "end",
-                        padding: "0 100px",
-                        marginTop: "50px",
-                    }}
-                >
-                    <Button title="등록" />
-                </div>
-            </FeedbackWriteBox>
-        </FeedbackWriteContainer>
+                    >
+                        <Button title="등록" />
+                    </div>
+                </FeedbackWriteBox>
+            </FeedbackWriteContainer>
+        </>
     );
 };
 
 const FeedbackWriteContainer = styled.div`
     display: block;
-    width: 1600px;
-    height: 87.5vh;
+    width: 100%;
+    height: 75vh;
 `;
 const FeedbackWriteBox = styled.div`
     position: relative;
@@ -81,6 +87,7 @@ const FeedbackWriteBody = styled.div`
     padding: 20px 0;
     text-align: center;
     border-bottom: 1px solid gray;
+    outline: none;
 `;
 
 export default FeedbackWrite;

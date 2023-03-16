@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import Button from "../components/UI/Button";
+import TabMenu from "../components/TabMenu";
 
 interface DataType {
     key: React.Key;
@@ -60,9 +61,11 @@ for (let i = 0; i < 100; i++) {
 }
 
 const FeedBack: React.FC = () => (
-    <div>
-        <style>
-            {`
+    <>
+        <TabMenu menu="게시판" />
+        <div>
+            <style>
+                {`
          .ant-table-wrapper .ant-table-thead > tr > th, .ant-table-wrapper .ant-table-thead > tr > td {
             background-color: #D8F0EA;
         }
@@ -76,28 +79,29 @@ const FeedBack: React.FC = () => (
         
         .ant-table-cell-scrollbar {display: none;}
         `}
-        </style>
-        <Table
-            columns={columns}
-            dataSource={data}
-            style={{
-                marginTop: "50px",
-                padding: "0 100px",
-                overflowX: "hidden",
-            }}
-            className="feedback-table"
-        />
-        <div
-            style={{
-                display: "flex",
-                justifyContent: "end",
-                padding: "0 100px",
-                marginTop: "50px",
-            }}
-        >
-            <Button title="등록" />
+            </style>
+            <Table
+                columns={columns}
+                dataSource={data}
+                style={{
+                    marginTop: "50px",
+                    padding: "0 100px",
+                    overflowX: "hidden",
+                }}
+                className="feedback-table"
+            />
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "end",
+                    padding: "0 100px",
+                    marginTop: "50px",
+                }}
+            >
+                <Button title="등록" />
+            </div>
         </div>
-    </div>
+    </>
 );
 
 export default FeedBack;
