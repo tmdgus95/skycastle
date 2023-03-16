@@ -23,6 +23,7 @@ export const HeaderContainer = styled.div`
     height: 112px;
     padding: 35px;
     justify-content: end;
+    align-items: center;
     span {
         font-weight: 700;
         font-size: 24px;

@@ -1,32 +1,36 @@
 import Find from "../components/modal/Find";
+import LoginBoder from "../components/UI/LoginBoder";
 import { FindIdContainer } from "../styles/Styles";
 
 const FindId = () => {
     return (
-        <FindIdContainer>
-            <h2>학습관리시스템</h2>
-            <h3>아이디 찾기</h3>
-            <form>
-                <input type="text" placeholder="이름" />
+        <>
+            <FindIdContainer>
+                <h2>학습관리시스템</h2>
+                <h3>아이디 찾기</h3>
+                <form>
+                    <input type="text" placeholder="이름" />
 
-                <br />
+                    <br />
 
-                <input type="text" placeholder="생년월일" />
+                    <input type="text" placeholder="생년월일" />
 
-                <br />
+                    <br />
 
-                <input type="text" placeholder="이메일" />
+                    <input type="text" placeholder="이메일" />
 
-                <br />
+                    <br />
 
-                <button>FIND</button>
-            </form>
+                    <button>FIND</button>
+                </form>
 
-            <div>
-                <button>비밀번호 찾기</button>
-            </div>
-            <Find />
-        </FindIdContainer>
+                <div>
+                    <button>비밀번호 찾기</button>
+                </div>
+                <Find />
+            </FindIdContainer>
+            <LoginBoder />
+        </>
     );
 };
 

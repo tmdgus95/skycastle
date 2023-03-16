@@ -28,7 +28,7 @@ const TabMenContent = styled.div`
     border-radius: 0px 40px 0px 0px;
     p {
         margin-left: 31px;
-        margin-top: 6px;
+        margin-top: 3px;
         font-weight: 700;
         font-size: 24px;
         color: ${(props) => props.theme.colors.white};
