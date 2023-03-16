@@ -2,6 +2,7 @@ import { ResponsiveRadar } from "@nivo/radar";
 import { ResponsiveBar } from "@nivo/bar";
 import { Title, Chart, Inner } from "../../styles/StudentStyles";
 import { FaBell } from "react-icons/fa";
+import TabMenu from "../../components/TabMenu";
 
 const Myaverage = () => {
     const thisMonthScore = [
@@ -104,8 +105,9 @@ const Myaverage = () => {
 
     return (
         <>
+            <TabMenu menu={"성적 현황"} />
             <Title>
-                <FaBell /> 옥지은 학생, 현재 "문법" 취약 과목입니다.
+                <FaBell />&nbsp;옥지은 학생, 현재 "문법" 취약 과목입니다.
             </Title>
             <Chart>
                 <Inner>
