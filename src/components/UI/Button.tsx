@@ -19,7 +19,7 @@ const Button1 = styled.button`
     font-size: 24px;
     line-height: 29px;
     color: ${(props) => props.theme.colors.pointColor};
-    margin-left: 580px;
+    
 
     &:hover {
         background-color: ${(props) => props.theme.colors.pointColor};
