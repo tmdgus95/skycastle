@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LoginInstance } from "../api/axios";
+import LoginBoder from "../components/UI/LoginBoder";
 import { setAccessToken } from "../store/slice/userSlice";
 import { LoginContainer } from "../styles/Styles";
 
@@ -29,7 +30,7 @@ const Login = () => {
             const accessToken = res.data.token.accessToken;
 
             dispatch(setAccessToken(accessToken));
-            navigate("/student/mypage");
+            navigate("/master/create");
             // console.log('로그인 응답', res);
             return;
         });
@@ -66,7 +67,7 @@ const Login = () => {
                     <button>비밀번호 찾기</button>
                 </div>
             </LoginContainer>
-            <Outlet />
+            <LoginBoder />
         </>
     );
 };
