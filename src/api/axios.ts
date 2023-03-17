@@ -1,6 +1,7 @@
 import axios from "axios";
 import { RootState, store } from "../store/store";
 
+const refreshToken = (store.getState() as RootState).auth.refreshToken;
 // axios 인스턴스 생성
 export const LoginInstance = axios.create({
     baseURL: "http://192.168.0.140:8686",
