@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -68,7 +67,6 @@ const Mypage = () => {
                     </div>
                     <button>수정</button>
                 </form>
-                <button>수정</button>
             </MypageContainer>
         </>
     );
@@ -91,6 +89,9 @@ const MypageContainer = styled.div`
         padding-left: 31px;
     }
     button {
+        position: absolute;
+        top: 550px;
+        left: 420px;
         width: 102px;
         height: 36px;
         background: ${(props) => props.theme.colors.pointColor};
