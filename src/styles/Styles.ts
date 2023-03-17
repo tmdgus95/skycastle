@@ -7,8 +7,8 @@ export const FlexContainer = styled.div`
 export const SideBarContainer = styled.div`
     width: 17%;
     height: 100vh;
-    background-color: ${(props) => props.theme.colors.mainColor};
-    color: ${(props) => props.theme.colors.white};
+    background-color: ${props => props.theme.colors.mainColor};
+    color: ${props => props.theme.colors.white};
     .sidebar-title {
         height: 15vh;
         font-size: 25px;
@@ -17,17 +17,17 @@ export const SideBarContainer = styled.div`
         line-height: 15vh;
     }
     .sidebar-menu {
-        background-color: ${(props) => props.theme.colors.mainColor};
-        color: ${(props) => props.theme.colors.white};
+        background-color: ${props => props.theme.colors.mainColor};
+        color: ${props => props.theme.colors.white};
         font-size: 17px;
         font-weight: 400;
         .ant-menu-title-content:hover {
-            color: ${(props) => props.theme.colors.white};
+            color: ${props => props.theme.colors.white};
         }
         .ant-menu-submenu:hover {
-            color: ${(props) => props.theme.colors.white};
+            color: ${props => props.theme.colors.white};
             .ant-menu-submenu-arrow {
-                color: ${(props) => props.theme.colors.white};
+                color: ${props => props.theme.colors.white};
             }
         }
         .jbwCWW {
@@ -35,12 +35,12 @@ export const SideBarContainer = styled.div`
         }
         .ant-menu-submenu-selected {
             .ant-menu-submenu-title {
-                color: ${(props) => props.theme.colors.white};
+                color: ${props => props.theme.colors.white};
             }
         }
         .ant-menu-item-selected {
             background-color: #495a5f;
-            color: ${(props) => props.theme.colors.white};
+            color: ${props => props.theme.colors.white};
         }
     }
 `;
@@ -94,7 +94,7 @@ export const HeaderContainer = styled.div`
 
 //로그인
 export const LoginContainer = styled.div`
-    background: ${(props) => props.theme.colors.mainColor};
+    background: ${props => props.theme.colors.mainColor};
     /* background-image: url("/images/스카이캐슬.jpg"); */
     background-size: cover;
     background-repeat: no-repeat;
@@ -105,7 +105,7 @@ export const LoginContainer = styled.div`
     h2 {
         font-weight: 700;
         font-size: 50px;
-        color: ${(props) => props.theme.colors.white};
+        color: ${props => props.theme.colors.white};
         margin-bottom: 141px;
         /* color: black; */
     }
@@ -124,7 +124,7 @@ export const LoginContainer = styled.div`
         margin-bottom: 123px;
     }
     input::placeholder {
-        color: ${(props) => props.theme.colors.mainColor};
+        color: ${props => props.theme.colors.mainColor};
     }
     form > button {
         position: static;
@@ -133,7 +133,7 @@ export const LoginContainer = styled.div`
         height: 50px;
         background: rgba(255, 255, 255, 0.49);
         border-radius: 20px;
-        color: ${(props) => props.theme.colors.mainColor};
+        color: ${props => props.theme.colors.mainColor};
     }
     button:nth-child(1) {
         top: 650px;
@@ -142,7 +142,7 @@ export const LoginContainer = styled.div`
         font-weight: 400;
         font-size: 24px;
         line-height: 29px;
-        color: ${(props) => props.theme.colors.white};
+        color: ${props => props.theme.colors.white};
     }
     button:nth-child(2) {
         top: 650px;
@@ -151,7 +151,7 @@ export const LoginContainer = styled.div`
         font-weight: 400;
         font-size: 24px;
         line-height: 29px;
-        color: ${(props) => props.theme.colors.white};
+        color: ${props => props.theme.colors.white};
     }
 `;
 
@@ -164,7 +164,7 @@ export const FindIdContainer = styled(LoginContainer)`
         font-weight: 500;
         font-size: 32px;
         margin-bottom: 83px;
-        color: ${(props) => props.theme.colors.white};
+        color: ${props => props.theme.colors.white};
     }
     input:nth-child(1) {
         margin-bottom: 38px;
@@ -192,7 +192,7 @@ export const FindPasswordContainer = styled(LoginContainer)`
         font-weight: 500;
         font-size: 32px;
         margin-bottom: 83px;
-        color: ${(props) => props.theme.colors.white};
+        color: ${props => props.theme.colors.white};
     }
     input:nth-child(1) {
         margin-bottom: 38px;
