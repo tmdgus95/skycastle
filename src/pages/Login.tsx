@@ -41,7 +41,16 @@ const Login = () => {
             dispatch(setRefreshToken(refreshToken));
             dispatch(setRole(role));
             dispatch(setName(name));
-            navigate("/student/mypage");
+            if (res.data.role === "MASTER") {
+                navigate("/master/create");
+            } else if (res.data.role === "TEACHER") {
+                navigate("/teacher/allaverage");
+            } else if (res.data.role === "STUDENT") {
+                navigate("/student/myaverage");
+            } else {
+                navigate("/");
+            }
+            // navigate("/master/create");
         });
     };
 

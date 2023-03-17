@@ -5,6 +5,8 @@ import { RootState, store } from "../store/store";
 const name = (store.getState() as RootState).auth.name;
 
 const Header = () => {
+    console.log(name);
+
     return (
         <HeaderContainer>
             <div>
@@ -12,7 +14,7 @@ const Header = () => {
                 <span>
                     <BsFillPersonFill />
                 </span>
-                <span>{name}님</span>
+                {name && <span>{name}님</span>}
             </div>
 
             <div>
