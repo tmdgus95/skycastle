@@ -52,7 +52,10 @@ const CreateUser = () => {
         console.log(body);
 
         HeaderInstance.put(`/api/member/join/${creatUserId}`, body)
-            .then((res) => console.log(res))
+            .then((res) => {
+                console.log(res);
+                alert("계정생성이 완료되었습니다.");
+            })
             .catch((err) => console.log(err));
     };
 
