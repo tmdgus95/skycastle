@@ -1,16 +1,31 @@
 import styled from "styled-components";
 import { GrClose } from "react-icons/gr";
 
-const Find = () => {
+interface FindProps {
+    title: string;
+    content?: number;
+    id?: string;
+    close: () => void;
+}
+
+const Find = ({ title, content, id, close }: FindProps) => {
     return (
         <FindContainer>
             <div>
-                <p>아이디찾기</p>
+                <p>{title}</p>
                 <button>
-                    <GrClose />
+                    <GrClose onClick={close} />
                 </button>
             </div>
-            <div>아이디 찾기</div>
+            <div>
+                {content && (
+                    <>
+                        <p>임시 비밀번호가 이메일로 전송 되었습니다.</p>
+                        <p>마이페이지에서 변경해 주시기 바랍니다.</p>
+                    </>
+                )}
+                {id && <p>찾으시는 아이디는 '{id}'입니다.</p>}
+            </div>
         </FindContainer>
     );
 };
@@ -36,6 +51,20 @@ const FindContainer = styled.div`
         button {
             position: static;
             padding-left: 700px;
+        }
+    }
+    div:nth-child(2) {
+        p {
+            line-height: 24px;
+            height: 30px;
+            font-weight: 400;
+            font-size: 24px;
+        }
+        p:nth-child(1) {
+            margin-top: 70px;
+        }
+        p:nth-child(2) {
+            margin-top: 20px;
         }
     }
 `;

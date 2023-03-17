@@ -3,7 +3,12 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoginInstance } from "../api/axios";
 import LoginBoder from "../components/UI/LoginBoder";
-import { setAccessToken } from "../store/slice/userSlice";
+import {
+    setAccessToken,
+    setName,
+    setRefreshToken,
+    setRole,
+} from "../store/slice/userSlice";
 import { LoginContainer } from "../styles/Styles";
 
 export interface FormEvent extends React.FormEvent {
@@ -26,13 +31,17 @@ const Login = () => {
             pwd: loginUser.pwd,
         };
         LoginInstance.post("/api/member/login", body).then((res) => {
-            // console.log(res.data);
+            console.log("로그인 응답", res);
             const accessToken = res.data.token.accessToken;
+            const refreshToken = res.data.token.refreshToken;
+            const role = res.data.role;
+            const name = res.data.name;
 
             dispatch(setAccessToken(accessToken));
-            navigate("/master/create");
-            // console.log('로그인 응답', res);
-            return;
+            dispatch(setRefreshToken(refreshToken));
+            dispatch(setRole(role));
+            dispatch(setName(name));
+            navigate("/student/mypage");
         });
     };
 
@@ -63,8 +72,12 @@ const Login = () => {
                 </form>
 
                 <div>
-                    <button>아이디 찾기</button>
-                    <button>비밀번호 찾기</button>
+                    <button onClick={() => navigate("/findid")}>
+                        아이디 찾기
+                    </button>
+                    <button onClick={() => navigate("/findpassword")}>
+                        비밀번호 찾기
+                    </button>
                 </div>
             </LoginContainer>
             <LoginBoder />
