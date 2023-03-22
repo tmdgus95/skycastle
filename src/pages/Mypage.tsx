@@ -1,19 +1,12 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { HeaderInstance } from "../api/axios";
 import TabMenu from "../components/TabMenu";
-import { RootState } from "../store/store";
 import { FormEvent, FormEventSubmit } from "./Login";
 
 const Mypage = () => {
     const navigate = useNavigate();
-    const accessToken = useSelector(
-        (state: RootState) => state.auth.accessToken
-    );
-    console.log("토큰 확인", accessToken);
-
     const [userPwd, setUserPwd] = useState({ miPwd: "", changeMiPwd: "" });
     const handelChange = (e: FormEvent) => {
         const { name, value } = e.target;

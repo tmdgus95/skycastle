@@ -3,12 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoginInstance } from "../api/axios";
 import LoginBoder from "../components/UI/LoginBoder";
-import {
-    setAccessToken,
-    setName,
-    setRefreshToken,
-    setRole,
-} from "../store/slice/userSlice";
+import { setName, setRole } from "../store/slice/userSlice";
 import { LoginContainer } from "../styles/Styles";
 
 export interface FormEvent extends React.FormEvent {
@@ -24,23 +19,24 @@ const Login = () => {
         const { name, value } = e.target;
         setLoginUser({ ...loginUser, [name]: value });
     };
-    const handleSubmit = (e: FormEventSubmit) => {
+    const handleSubmit = async (e: FormEventSubmit) => {
         e.preventDefault();
         const body = {
             id: loginUser.id,
             pwd: loginUser.pwd,
         };
-        LoginInstance.post("/api/member/login", body).then((res) => {
+
+        try {
+            const res = await LoginInstance.post("/api/member/login", body);
             console.log("로그인 응답", res);
             const accessToken = res.data.token.accessToken;
-            const refreshToken = res.data.token.refreshToken;
             const role = res.data.role;
             const name = res.data.name;
 
-            dispatch(setAccessToken(accessToken));
-            dispatch(setRefreshToken(refreshToken));
+            window.localStorage.setItem("token", accessToken);
             dispatch(setRole(role));
             dispatch(setName(name));
+
             if (res.data.role === "MASTER") {
                 navigate("/master/create");
             } else if (res.data.role === "TEACHER") {
@@ -50,8 +46,10 @@ const Login = () => {
             } else {
                 navigate("/");
             }
-            // navigate("/master/create");
-        });
+        } catch (err) {
+            alert("아이디 비밀번호를 확인해주세요");
+            console.error(err);
+        }
     };
 
     return (
