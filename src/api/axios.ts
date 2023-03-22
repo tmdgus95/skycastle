@@ -1,7 +1,5 @@
 import axios from "axios";
-import { RootState, store } from "../store/store";
 
-const refreshToken = (store.getState() as RootState).auth.refreshToken;
 // axios 인스턴스 생성
 export const LoginInstance = axios.create({
     baseURL: "http://192.168.0.140:8686",
@@ -16,7 +14,7 @@ export const HeaderInstance = axios.create({
 
 HeaderInstance.interceptors.request.use(
     (config) => {
-        const accessToken = (store.getState() as RootState).auth.accessToken;
+        const accessToken = window.localStorage.getItem("token");
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
