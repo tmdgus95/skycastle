@@ -5,7 +5,7 @@ import { MonthlyGradeList } from "../../styles/StudentStyles";
 
 interface DataType {
     key: React.Key;
-    name: string;
+    month: string;
     listening: number;
     reading: number;
     grammar: number;
@@ -15,8 +15,8 @@ interface DataType {
 
 const columns: ColumnsType<DataType> = [
     {
-        title: "Name",
-        dataIndex: "name",
+        title: "날짜",
+        dataIndex: "month",
     },
     {
         title: "분야",
@@ -71,10 +71,10 @@ const columns: ColumnsType<DataType> = [
 ];
 
 const data: DataType[] = [];
-for (let i = 0; i <= 12; i++) {
+for (let i = 1; i <= 12; i++) {
     data.push({
         key: i,
-        name: `엄준식${i}`,
+        month: `${i}월`,
         listening: 25,
         reading: 25,
         grammar: 25,
