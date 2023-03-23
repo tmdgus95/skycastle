@@ -4,14 +4,14 @@ import styled from "styled-components";
 export const Title = styled.div`
     display: flex;
     align-items: center;
-    padding: 5% 0 0 3%;
+    padding: 3% 0 0 3%;
     font-size: 20px;
 `;
 // 차트 부분 레이아웃
 export const Chart = styled.div`
     display: flex;
     gap: 5%;
-    padding: 5% 0 0 3%;
+    padding: 3% 0 3% 3%;
 `;
 // 차트 공통 레이아웃
 export const Inner = styled.div`
@@ -26,6 +26,12 @@ export const Inner = styled.div`
         top: 5%;
         font-size: 24px;
     }
+`;
+// 차트 분석글
+export const Analysis = styled.div`
+    padding-left: 3%;
+    padding-right: 5%;
+    font-size: 22px;
 `;
 
 // Gradelist.tsx

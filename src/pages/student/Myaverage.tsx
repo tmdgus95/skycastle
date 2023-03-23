@@ -1,112 +1,148 @@
 import { ResponsiveRadar } from "@nivo/radar";
 import { ResponsiveBar } from "@nivo/bar";
-import { Title, Chart, Inner } from "../../styles/StudentStyles";
+import { Title, Chart, Inner, Analysis } from "../../styles/StudentStyles";
 import { FaBell } from "react-icons/fa";
 import TabMenu from "../../components/TabMenu";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { useEffect, useState } from "react";
+import { HeaderInstance } from "../../api/axios";
 
 const Myaverage = () => {
     const name = useSelector((state: RootState) => state.auth.name);
-    console.log("name", name);
+    // console.log("name", name);
 
-    const thisMonthScore = [
-        {
-            subject: "문법",
-            점수: 60,
-        },
-        {
-            subject: "어휘",
-            점수: 45,
-        },
-        {
-            subject: "독해",
-            점수: 70,
-        },
-        {
-            subject: "듣기",
-            점수: 85,
-        },
-    ];
-    const monthlyChangeScore = [
-        {
-            country: "1월",
-            문법: 70,
-            문법Color: "hsl(197, 70%, 50%)",
-            어휘: 40,
-            어휘Color: "hsl(232, 70%, 50%)",
-            독해: 55,
-            독해Color: "hsl(161, 70%, 50%)",
-            듣기: 70,
-            듣기Color: "hsl(304, 70%, 50%)",
-        },
-        {
-            country: "2월",
-            문법: 75,
-            문법Color: "hsl(342, 70%, 50%)",
-            어휘: 50,
-            어휘Color: "hsl(212, 70%, 50%)",
-            독해: 65,
-            독해Color: "hsl(287, 70%, 50%)",
-            듣기: 75,
-            듣기Color: "hsl(139, 70%, 50%)",
-        },
-        {
-            country: "3월",
-            문법: 60,
-            문법Color: "hsl(166, 70%, 50%)",
-            어휘: 45,
-            어휘Color: "hsl(283, 70%, 50%)",
-            독해: 70,
-            독해Color: "hsl(142, 70%, 50%)",
-            듣기: 85,
-            듣기Color: "hsl(270, 70%, 50%)",
-        },
-        {
-            country: "4월",
-            문법: 80,
-            문법Color: "hsl(272, 70%, 50%)",
-            어휘: 55,
-            어휘Color: "hsl(358, 70%, 50%)",
-            독해: 75,
-            독해Color: "hsl(235, 70%, 50%)",
-            듣기: 95,
-            듣기Color: "hsl(324, 70%, 50%)",
-        },
-        {
-            country: "5월",
-            문법: 55,
-            문법Color: "hsl(210, 70%, 50%)",
-            어휘: 70,
-            어휘Color: "hsl(117, 70%, 50%)",
-            독해: 80,
-            독해Color: "hsl(145, 70%, 50%)",
-            듣기: 90,
-            듣기Color: "hsl(276, 70%, 50%)",
-        },
-        {
-            country: "6월",
-            문법: 75,
-            문법Color: "hsl(29, 70%, 50%)",
-            어휘: 65,
-            어휘Color: "hsl(170, 70%, 50%)",
-            독해: 95,
-            독해Color: "hsl(356, 70%, 50%)",
-            듣기: 80,
-            듣기Color: "hsl(127, 70%, 50%)",
-        },
-        {
-            country: "7월",
-            문법: 100,
-            문법Color: "hsl(58, 70%, 50%)",
-            어휘: 100,
-            어휘Color: "hsl(72, 70%, 50%)",
-            독해: 100,
-            독해Color: "hsl(254, 70%, 50%)",
-            듣기: 100,
-            듣기Color: "hsl(318, 70%, 50%)",
-        },
-    ];
+    const [scoreLists, setScoreLists] = useState([]);
+    // console.log(scoreLists && scoreLists);
+
+    const fetchData = () => {
+        HeaderInstance.get("/api/score/list/now")
+            .then((res) => {
+                // console.log(res.data.scoreList);
+                setScoreLists(res.data.scoreList);
+            })
+            .catch((err) => console.log(err));
+    };
+
+    const [scoreLists2, setScoreLists2] = useState([]);
+    const [explanation, setExplanation] = useState();
+    const [weeknessSubject, setWeeknessSubject] = useState();
+    // console.log(scoreLists2 && scoreLists2);
+
+    const fetchData2 = () => {
+        HeaderInstance.get("/api/score/list/year")
+            .then((res) => {
+                console.log(res.data);
+                setScoreLists2(res.data.scoreList);
+                setExplanation(res.data.explanation);
+                setWeeknessSubject(res.data.weeknessSubject);
+            })
+            .catch((err) => console.log(err));
+    };
+
+    useEffect(() => {
+        fetchData();
+        fetchData2();
+    }, []);
+
+    // const thisMonthScore = [
+    //     {
+    //         subject: "문법",
+    //         점수: 60,
+    //     },
+    //     {
+    //         subject: "어휘",
+    //         점수: 45,
+    //     },
+    //     {
+    //         subject: "독해",
+    //         점수: 70,
+    //     },
+    //     {
+    //         subject: "듣기",
+    //         점수: 85,
+    //     },
+    // ];
+
+    // const monthlyChangeScore = [
+    //     {
+    //         country: "1월",
+    //         문법: 70,
+    //         문법Color: "hsl(197, 70%, 50%)",
+    //         어휘: 40,
+    //         어휘Color: "hsl(232, 70%, 50%)",
+    //         독해: 55,
+    //         독해Color: "hsl(161, 70%, 50%)",
+    //         듣기: 70,
+    //         듣기Color: "hsl(304, 70%, 50%)",
+    //     },
+    //     {
+    //         country: "2월",
+    //         문법: 75,
+    //         문법Color: "hsl(342, 70%, 50%)",
+    //         어휘: 50,
+    //         어휘Color: "hsl(212, 70%, 50%)",
+    //         독해: 65,
+    //         독해Color: "hsl(287, 70%, 50%)",
+    //         듣기: 75,
+    //         듣기Color: "hsl(139, 70%, 50%)",
+    //     },
+    //     {
+    //         country: "3월",
+    //         문법: 60,
+    //         문법Color: "hsl(166, 70%, 50%)",
+    //         어휘: 45,
+    //         어휘Color: "hsl(283, 70%, 50%)",
+    //         독해: 70,
+    //         독해Color: "hsl(142, 70%, 50%)",
+    //         듣기: 85,
+    //         듣기Color: "hsl(270, 70%, 50%)",
+    //     },
+    //     {
+    //         country: "4월",
+    //         문법: 80,
+    //         문법Color: "hsl(272, 70%, 50%)",
+    //         어휘: 55,
+    //         어휘Color: "hsl(358, 70%, 50%)",
+    //         독해: 75,
+    //         독해Color: "hsl(235, 70%, 50%)",
+    //         듣기: 95,
+    //         듣기Color: "hsl(324, 70%, 50%)",
+    //     },
+    //     {
+    //         country: "5월",
+    //         문법: 55,
+    //         문법Color: "hsl(210, 70%, 50%)",
+    //         어휘: 70,
+    //         어휘Color: "hsl(117, 70%, 50%)",
+    //         독해: 80,
+    //         독해Color: "hsl(145, 70%, 50%)",
+    //         듣기: 90,
+    //         듣기Color: "hsl(276, 70%, 50%)",
+    //     },
+    //     {
+    //         country: "6월",
+    //         문법: 75,
+    //         문법Color: "hsl(29, 70%, 50%)",
+    //         어휘: 65,
+    //         어휘Color: "hsl(170, 70%, 50%)",
+    //         독해: 95,
+    //         독해Color: "hsl(356, 70%, 50%)",
+    //         듣기: 80,
+    //         듣기Color: "hsl(127, 70%, 50%)",
+    //     },
+    //     {
+    //         country: "7월",
+    //         문법: 100,
+    //         문법Color: "hsl(58, 70%, 50%)",
+    //         어휘: 100,
+    //         어휘Color: "hsl(72, 70%, 50%)",
+    //         독해: 100,
+    //         독해Color: "hsl(254, 70%, 50%)",
+    //         듣기: 100,
+    //         듣기Color: "hsl(318, 70%, 50%)",
+    //     },
+    // ];
 
     return (
         <>
@@ -115,15 +151,15 @@ const Myaverage = () => {
                 <FaBell />
                 &nbsp;
                 {name ? <span>{name}</span> : <span>이름이 없습니다.</span>}
-                &nbsp;학생, 현재 "문법" 취약 과목입니다.
+                &nbsp;학생, 현재 {weeknessSubject} 취약 과목입니다.
             </Title>
             <Chart>
                 <Inner>
                     <p>&#8226; 이번달 내 점수</p>
                     <ResponsiveRadar
-                        data={thisMonthScore}
-                        keys={["점수"]}
-                        indexBy="subject"
+                        data={scoreLists}
+                        keys={["grade"]}
+                        indexBy="subjectName"
                         // valueFormat=">-.2f"
                         margin={{ top: 110, bottom: 70 }}
                         borderColor="#fa0000"
@@ -140,9 +176,14 @@ const Myaverage = () => {
                 <Inner>
                     <p>&#8226; 월별 내 점수 변화</p>
                     <ResponsiveBar
-                        data={monthlyChangeScore}
-                        keys={["문법", "어휘", "독해", "듣기"]}
-                        indexBy="country"
+                        data={scoreLists2}
+                        keys={[
+                            "grammar",
+                            "vocabulary",
+                            "comprehension",
+                            "listening",
+                        ]}
+                        indexBy="testName"
                         margin={{ top: 100, right: 40, bottom: 50, left: 60 }}
                         padding={0.5}
                         maxValue={400}
@@ -192,6 +233,7 @@ const Myaverage = () => {
                     />
                 </Inner>
             </Chart>
+            <Analysis>&#8226; {explanation}</Analysis>
         </>
     );
 };
