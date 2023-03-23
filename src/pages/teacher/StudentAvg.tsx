@@ -1,34 +1,124 @@
 import { ResponsiveRadar } from "@nivo/radar";
 import { ResponsiveBar } from "@nivo/bar";
-import { Title, Chart, Inner } from "../../styles/StudentStyles";
+import { Inner } from "../../styles/StudentStyles";
 import {
     SearchStyle,
     TeacherChart,
     TeacherTitle,
 } from "../../styles/TeacherStyles";
 import { FaBell } from "react-icons/fa";
-import Search from "antd/es/input/Search";
 import TabMenu from "../../components/TabMenu";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Select } from "antd";
 
 const StudentAvg = () => {
-    const thisMonthScore = [
-        {
-            subject: "문법",
-            점수: 60,
-        },
-        {
-            subject: "어휘",
-            점수: 45,
-        },
-        {
-            subject: "독해",
-            점수: 70,
-        },
-        {
-            subject: "듣기",
-            점수: 85,
-        },
-    ];
+    // 학생 리스트
+    const [studentList, setStudentList] = useState([]);
+    const getList = async () => {
+        const accessToken = window.localStorage.getItem("token");
+        await axios
+            .get("http://192.168.0.140:8686/api/class/student", {
+                headers: { Authorization: `Bearer ${accessToken}` },
+            })
+            .then((res) => {
+                console.log(res.data);
+                setStudentList(res.data.content);
+            });
+    };
+    const searchList: { value: number; label: string }[] = studentList.map(
+        (item: { seq: number; name: string }) => {
+            return { value: item.seq, label: item.name };
+        }
+    );
+    // console.log(searchList);
+
+    // 이번달 점수 데이터
+    const [studentSelect, setStudentSelect] = useState([]);
+
+    // 월별 점수 데이터
+    const [monthlyGrade, setMonthlyGrade] = useState([]);
+    console.log(monthlyGrade);
+
+    type monthlyType = {
+        test: string;
+        문법: string;
+        듣기: string;
+        어휘: string;
+        독해: string;
+    };
+
+    const monthlyData: monthlyType[] = monthlyGrade.map(
+        (item: {
+            testName: string;
+            grammar: string;
+            listening: string;
+            vocabulary: string;
+            comprehension: string;
+        }) => {
+            return {
+                test: item.testName,
+                문법: item.grammar,
+                듣기: item.listening,
+                어휘: item.vocabulary,
+                독해: item.comprehension,
+            };
+        }
+    );
+
+    console.log(monthlyData);
+
+    const onChange = (value: string) => {
+        console.log(`selected ${value}`);
+        try {
+            const accessToken = window.localStorage.getItem("token");
+            axios
+                .get(`http://192.168.0.140:8686/api/score/list/now/${value}`, {
+                    headers: { Authorization: `Bearer ${accessToken}` },
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    setStudentSelect(res.data.scoreList);
+                });
+            axios
+                .get(`http://192.168.0.140:8686/api/score/list/year/${value}`, {
+                    headers: { Authorization: `Bearer ${accessToken}` },
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    setMonthlyGrade(res.data.scoreList);
+                });
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        getList();
+    }, []);
+
+    const onSearch = (value: string) => {
+        console.log("search:", value);
+    };
+
+    // const thisMonthScore = [
+    //     {
+    //         subject: "문법",
+    //         점수: 60,
+    //     },
+    //     {
+    //         subject: "어휘",
+    //         점수: 45,
+    //     },
+    //     {
+    //         subject: "독해",
+    //         점수: 70,
+    //     },
+    //     {
+    //         subject: "듣기",
+    //         점수: 85,
+    //     },
+    // ];
     const monthlyChangeScore = [
         {
             country: "1월",
@@ -108,13 +198,25 @@ const StudentAvg = () => {
             듣기Color: "hsl(318, 70%, 50%)",
         },
     ];
-    const onSearch = (value: string) => console.log(value);
 
     return (
         <>
             <TabMenu menu={"개인 통계"} />
             <SearchStyle>
-                <Search placeholder="이름을 입력하세요" onSearch={onSearch} />
+                {/* <Search placeholder="이름을 입력하세요" onSearch={onSearch} /> */}
+                <Select
+                    showSearch
+                    placeholder="Select a person"
+                    optionFilterProp="children"
+                    onChange={onChange}
+                    onSearch={onSearch}
+                    filterOption={(input, option) =>
+                        (option?.label ?? "")
+                            .toLowerCase()
+                            .includes(input.toLowerCase())
+                    }
+                    options={searchList}
+                />
             </SearchStyle>
             <TeacherTitle>
                 <FaBell />
@@ -124,11 +226,12 @@ const StudentAvg = () => {
                 <Inner>
                     <p>&#8226; 이번달 옥지은 학생 점수</p>
                     <ResponsiveRadar
-                        data={thisMonthScore}
-                        keys={["점수"]}
-                        indexBy="subject"
+                        // data={thisMonthScore}
+                        data={studentSelect}
+                        keys={["grade"]}
+                        indexBy="subjectName"
                         // valueFormat=">-.2f"
-                        margin={{ top: 110, bottom: 70 }}
+                        margin={{ top: 110, bottom: 70, left: 70, right: 70 }}
                         borderColor="#fa0000"
                         gridLabelOffset={36}
                         enableDots={false}
@@ -143,9 +246,10 @@ const StudentAvg = () => {
                 <Inner>
                     <p>&#8226; 월별 옥지은 학생 점수 변화</p>
                     <ResponsiveBar
-                        data={monthlyChangeScore}
+                        // data={monthlyChangeScore}
+                        data={monthlyData}
                         keys={["문법", "어휘", "독해", "듣기"]}
-                        indexBy="country"
+                        indexBy="test"
                         margin={{ top: 100, right: 40, bottom: 50, left: 60 }}
                         padding={0.5}
                         maxValue={400}

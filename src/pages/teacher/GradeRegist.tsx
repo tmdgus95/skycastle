@@ -1,25 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Form, Input, Button, DatePicker } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { GradeRegistContainer } from "../../styles/TeacherStyles";
 import Search from "antd/es/input/Search";
 import dayjs from "dayjs";
 import moment from "moment";
+import axios from "axios";
 
 interface DataType {
-    key: React.Key;
+    // key: React.Key;
+    key: number;
     name: string;
-    listening: number;
-    reading: number;
-    grammar: number;
-    vocabulary: number;
-    class: string;
+    listening: any;
+    reading: any;
+    grammar: any;
+    vocabulary: any;
+    // class: string;
 }
+
+// type StudentType = {
+//     key: number;
+//     name: string;
+// };
 
 const columns: ColumnsType<DataType> = [
     {
         title: "Name",
         dataIndex: "name",
+        key: "name",
+        render: (text, record) => (
+            <Form.Item name={["user", record.key, "name"]} initialValue={text}>
+                {text}
+            </Form.Item>
+        ),
+    },
+    {
+        title: "Key",
+        dataIndex: "key",
+        key: "key",
     },
     {
         title: "분야",
@@ -106,45 +124,45 @@ const columns: ColumnsType<DataType> = [
             },
         ],
     },
-    {
-        title: "Class",
-        dataIndex: "class",
-        key: "class",
-        filters: [
-            {
-                text: "A반",
-                value: "A반",
-            },
-            {
-                text: "B반",
-                value: "B반",
-            },
-            {
-                text: "C반",
-                value: "C반",
-            },
-            {
-                text: "D반",
-                value: "D반",
-            },
-        ],
-        onFilter: (value, record) =>
-            record.class.indexOf(value as string) === 0,
-    },
+    // {
+    //     title: "Class",
+    //     dataIndex: "class",
+    //     key: "class",
+    //     filters: [
+    //         {
+    //             text: "A반",
+    //             value: "A반",
+    //         },
+    //         {
+    //             text: "B반",
+    //             value: "B반",
+    //         },
+    //         {
+    //             text: "C반",
+    //             value: "C반",
+    //         },
+    //         {
+    //             text: "D반",
+    //             value: "D반",
+    //         },
+    //     ],
+    //     onFilter: (value, record) =>
+    //         record.class.indexOf(value as string) === 0,
+    // },
 ];
 
-const data: DataType[] = [];
-for (let i = 0; i < 62; i++) {
-    data.push({
-        key: i,
-        name: `엄준식${i}`,
-        listening: 25,
-        reading: 25,
-        grammar: 25,
-        vocabulary: 25,
-        class: "A반",
-    });
-}
+// const data: DataType[] = [];
+// for (let i = 0; i < 62; i++) {
+//     data.push({
+//         key: i,
+//         name: `엄준식${i}`,
+//         listening: 25,
+//         reading: 25,
+//         grammar: 25,
+//         vocabulary: 25,
+//         class: "A반",
+//     });
+// }
 
 // const rowSelection = {
 //   onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
@@ -166,20 +184,54 @@ interface Props {
 }
 
 const GradeRegist = ({ write, handleWriteChange }: Props) => {
+    // ant 테이블 관련
     const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
     const onSearch = (value: string) => console.log(value);
     const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
         console.log("selectedRowKeys changed: ", newSelectedRowKeys);
         setSelectedRowKeys(newSelectedRowKeys);
     };
-
     const rowSelection = {
         selectedRowKeys,
         onChange: onSelectChange,
     };
-
     const defaultMonth = moment(new Date()).format("YYYY/MM");
 
+    // 학생 리스트
+    const [studentList, setStudentList] = useState([]);
+    const getPosts = async () => {
+        const accessToken = window.localStorage.getItem("token");
+        await axios
+            .get("http://192.168.0.140:8686/api/class/student", {
+                headers: { Authorization: `Bearer ${accessToken}` },
+            })
+            .then((res) => {
+                console.log(res.data);
+                setStudentList(res.data.content);
+            });
+    };
+    useEffect(() => {
+        getPosts();
+    }, []);
+
+    console.log(studentList);
+
+    const list: DataType[] = studentList.map(
+        (item: { seq: number; name: string }) => {
+            return {
+                key: item.seq,
+                name: item.name,
+                listening: "",
+                reading: "",
+                grammar: "",
+                vocabulary: "",
+            };
+        }
+    );
+
+    console.log(list);
+
+    // 제출
     const onFinish = (values: any) => {
         console.log("Success:", values);
     };
@@ -197,7 +249,8 @@ const GradeRegist = ({ write, handleWriteChange }: Props) => {
                     className="t-grade"
                     rowSelection={rowSelection}
                     columns={columns}
-                    dataSource={data}
+                    // dataSource={data}
+                    dataSource={list}
                     footer={() => (
                         <div className="flex justify-between">
                             <Search
