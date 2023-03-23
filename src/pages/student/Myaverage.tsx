@@ -3,8 +3,13 @@ import { ResponsiveBar } from "@nivo/bar";
 import { Title, Chart, Inner } from "../../styles/StudentStyles";
 import { FaBell } from "react-icons/fa";
 import TabMenu from "../../components/TabMenu";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const Myaverage = () => {
+    const name = useSelector((state: RootState) => state.auth.name);
+    console.log("name", name);
+
     const thisMonthScore = [
         {
             subject: "문법",
@@ -107,7 +112,10 @@ const Myaverage = () => {
         <>
             <TabMenu menu={"성적 현황"} />
             <Title>
-                <FaBell />&nbsp;옥지은 학생, 현재 "문법" 취약 과목입니다.
+                <FaBell />
+                &nbsp;
+                {name ? <span>{name}</span> : <span>이름이 없습니다.</span>}
+                &nbsp;학생, 현재 "문법" 취약 과목입니다.
             </Title>
             <Chart>
                 <Inner>
