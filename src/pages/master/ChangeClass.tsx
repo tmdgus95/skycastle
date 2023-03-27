@@ -1,9 +1,10 @@
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { HeaderInstance } from "../../api/axios";
+import { GoSearch } from "react-icons/go";
 import TabMenu from "../../components/TabMenu";
 import Button from "../../components/UI/Button";
-import { GoSearch } from "react-icons/go";
-import { HeaderInstance } from "../../api/axios";
-import { useEffect, useState } from "react";
+import ChangeClassModal from "../../components/modal/ChangeClassModal";
 
 type User = {
     birth: string;
@@ -14,20 +15,14 @@ type User = {
     seq: number;
 };
 
-const ManagementUser = () => {
+export default function ChangeClass() {
     const [userList, setUserList] = useState<User[]>([]);
-    const [deleteUser, setDeleteUser] = useState(0);
-    const [searchName, setSearchName] = useState("");
 
     const fetchUserList = async () => {
-        const address =
-            searchName === ""
-                ? "/api/member/list"
-                : `/api/member/list?keyword=${searchName}`;
         try {
-            const res = await HeaderInstance.get(address);
+            const res = await HeaderInstance.get("/api/member/stu/list");
             console.log(res);
-            setUserList(res.data.memberList);
+            setUserList(res.data.studentList);
         } catch (error) {
             console.log(error);
         }
@@ -35,31 +30,10 @@ const ManagementUser = () => {
 
     useEffect(() => {
         fetchUserList();
-    }, [searchName]);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(setSearchName(e.target.value));
-    };
-    const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(parseInt(e.target.name));
-        setDeleteUser(parseInt(e.target.name));
-    };
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        HeaderInstance.get(`/api/member/drop?seq=${deleteUser}`)
-            .then((res) => {
-                console.log(res);
-                if (res.data.message === "이미 탈퇴 상태 입니다.") {
-                    alert(res.data.message);
-                } else {
-                    alert("회원탈퇴가 완료되었습니다.");
-                }
-            })
-            .catch((err) => console.log(err));
-    };
+    }, []);
     return (
-        <>
-            <TabMenu menu="계정관리" />
+        <section>
+            <TabMenu menu="반 변경" />
             <ManageTable>
                 <thead>
                     <tr>
@@ -78,9 +52,11 @@ const ManagementUser = () => {
                                 <tr key={seq}>
                                     <td>
                                         <input
-                                            type="checkbox"
                                             name={seq.toString()}
-                                            onChange={handleCheck}
+                                            type="checkbox"
+                                            onChange={(e) =>
+                                                console.log(e.target.name)
+                                            }
                                         />
                                     </td>
                                     <td>{role}</td>
@@ -94,18 +70,15 @@ const ManagementUser = () => {
                     )}
                 </tbody>
             </ManageTable>
-            <ManageForm onSubmit={handleSubmit}>
+            <ManageForm>
                 <StyledGoSearch />
-                <input
-                    type="text"
-                    placeholder="이름을 검색하세요."
-                    onChange={handleChange}
-                />
-                <Button title="정보 삭제" />
+                <input type="text" placeholder="이름을 검색하세요." />
+                <Button title="반 변경" />
             </ManageForm>
-        </>
+            <ChangeClassModal />
+        </section>
     );
-};
+}
 
 const ManageTable = styled.table`
     margin-top: 75px;
@@ -142,12 +115,9 @@ const ManageForm = styled.form`
         margin-top: 46px;
     }
 `;
-
 const StyledGoSearch = styled(GoSearch)`
     position: absolute;
     top: 32px;
     left: 45px;
     font-size: 20px;
 `;
-
-export default ManagementUser;
