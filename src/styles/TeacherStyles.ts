@@ -210,7 +210,7 @@ export const TeacherTitle = styled.div`
 
 // 검색창 스타일
 export const SearchStyle = styled.div`
-  .ant-input-wrapper {
+  .ant-select-selector {
     width: 200px;
     margin: 2% 0 0 3%;
     border: 1px solid ${(props) => props.theme.colors.pointColor};
