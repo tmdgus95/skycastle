@@ -1,39 +1,89 @@
 import TabMenu from "../components/TabMenu";
 import styled from "styled-components";
 import Button from "../components/UI/Button";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { HeaderInstance } from "../api/axios";
 
 const FeedbackDetail = () => {
+    const { titleId } = useParams();
+    const [detailInfo, setDetailInfo] = useState({
+        content: "",
+        regDt: "",
+        title: "",
+        writer: "",
+        comment: [],
+    });
+    // console.log(titleId);
+    console.log(detailInfo);
+
+    const commentList = detailInfo.comment;
+    console.log(commentList);
+
+    const [write, setWrite] = useState("");
+    // console.log(write);
+
+    const [reviewList, setReviewList] = useState([]);
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        let body = {
+            comment: write,
+        };
+
+        HeaderInstance.put(`/api/feedback/comment/${titleId}`, body)
+            .then((res) => console.log(res))
+           
+            .catch((err) => console.log(err));
+        setWrite("");
+    };
+
+    useEffect(() => {
+        HeaderInstance.get(`/api/feedback/${titleId}`)
+
+            .then((res) => {
+                console.log(res);
+                setDetailInfo(res.data.detail);
+            })
+            .catch((err) => console.log(err));
+    }, []);
+
+    interface CommentItem {
+        name: string;
+        comment: string;
+    }
+
     return (
         <>
             <TabMenu menu="게시판" />
             <Container>
                 <Inner>
                     <DetailHeader>
-                        <p>선생님</p>
-                        <p>제목</p>
-                        <p>날짜</p>
+                        <p>{detailInfo.writer} 선생님</p>
+                        {detailInfo.title}
+                        <p> {detailInfo.regDt}</p>
                     </DetailHeader>
                     <DetailBody>
-                        <DetailContent>
-                            지은학생 문법은 올랐는데 어휘가 좀 부족하네요
-                            <br />
-                            지원대학 가려면 좀만 더 힘내자
-                        </DetailContent>
+                        <DetailContent>{detailInfo.content}</DetailContent>
                     </DetailBody>
-                    <ReviewContainer>
-                        <ReviewInner>
-                            <Review>
-                                <div> 학생</div>
-                                <div>밤새 열심히 했는데 말넘심...ㅠㅠ</div>
-                                <button>X</button>
-                            </Review>
-                            <Review>
-                                <div> 선생님</div>
-                                <div>이녀석 운동장으로 따라와</div>
-                                <button>X</button>
-                            </Review>
+                    <form onSubmit={handleSubmit}>
+                        <ReviewContainer>
+                            {commentList.map((item: CommentItem) => (
+                                <div key={item.name}>
+                                    <ReviewInner>
+                                        <Review>
+                                            <div>{item.comment}</div>
+                                            <button>X</button>
+                                        </Review>
+                                    </ReviewInner>
+                                </div>
+                            ))}
                             <RegistInner>
-                                <Input />
+                                <Input
+                                    onChange={(e) => setWrite(e.target.value)}
+                                    value={write}
+                                />
                                 <Button title="등록" />
                             </RegistInner>
                             <div
@@ -45,8 +95,8 @@ const FeedbackDetail = () => {
                             >
                                 <Button title="수정" />
                             </div>
-                        </ReviewInner>
-                    </ReviewContainer>
+                        </ReviewContainer>
+                    </form>
                 </Inner>
             </Container>
         </>
@@ -97,15 +147,14 @@ const DetailContent = styled.div`
 `;
 
 const ReviewContainer = styled.div`
-    width: 100%;
+    /* width: 100%;
     height: 40vh;
-    margin-top: 30px;
+    margin-top: 30px; */
 `;
 
 const ReviewInner = styled.div`
     width: 100%;
     height: 100%;
-    margin-top: 200px;
 `;
 
 const Review = styled.div`

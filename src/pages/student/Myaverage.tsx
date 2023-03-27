@@ -32,7 +32,7 @@ const Myaverage = () => {
     const fetchData2 = () => {
         HeaderInstance.get("/api/score/list/year")
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 setScoreLists2(res.data.scoreList);
                 setExplanation(res.data.explanation);
                 setWeeknessSubject(res.data.weeknessSubject);
@@ -151,7 +151,7 @@ const Myaverage = () => {
                 <FaBell />
                 &nbsp;
                 {name ? <span>{name}</span> : <span>이름이 없습니다.</span>}
-                &nbsp;학생, 현재 {weeknessSubject} 취약 과목입니다.
+                &nbsp;학생, 현재 '{weeknessSubject}' 취약 과목입니다.
             </Title>
             <Chart>
                 <Inner>
