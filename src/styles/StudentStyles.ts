@@ -47,6 +47,10 @@ export const MonthlyGradeList = styled.div`
     .ant-table-wrapper {
         th {
             background: ${(props) => props.theme.colors.menuColor} !important;
+            text-align: center !important;
+        }
+        td {
+            text-align: center;
         }
     }
 `;
