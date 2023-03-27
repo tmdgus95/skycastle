@@ -55,7 +55,10 @@ const SideBar = () => {
                             <Link to="/master/create">계정 생성</Link>
                         </Menu.Item>
                         <Menu.Item key="menu-9">
-                            <Link to="/master/management">관리</Link>
+                            <Link to="/master/management">계정 삭제</Link>
+                        </Menu.Item>
+                        <Menu.Item key="menu-10">
+                            <Link to="/master/classchange">반 변경</Link>
                         </Menu.Item>
                     </SubMenu>
                 )}
