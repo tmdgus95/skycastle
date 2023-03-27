@@ -16,10 +16,10 @@ const SideBar = () => {
                 {role === "STUDENT" && (
                     <SubMenu key="sub1" title="성적현황_학생">
                         <Menu.Item key="menu-1">
-                            <Link to="/student/myaverage">성적 조회</Link>
+                            <Link to="/student/gradelist">성적 조회</Link>
                         </Menu.Item>
                         <Menu.Item key="menu-2">
-                            <Link to="/student/gradelist">성적 통계</Link>
+                            <Link to="/student/myaverage">성적 통계</Link>
                         </Menu.Item>
                         <Menu.Item key="menu-6">
                             <Link to="/student/feedback">게시판</Link>
