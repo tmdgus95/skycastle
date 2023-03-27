@@ -24,6 +24,7 @@ import FindPassword from "./pages/FindPassword";
 import GradeList from "./pages/teacher/GradeList";
 import AllAverage from "./pages/teacher/AllAverage";
 import StudentAvg from "./pages/teacher/StudentAvg";
+import ChangeClass from "./pages/master/ChangeClass";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
     children: [
       { path: "create", element: <CreateUser /> },
       { path: "management", element: <ManagementUser /> },
+      { path: "classchange", element: <ChangeClass /> },
     ],
   },
   {
