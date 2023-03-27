@@ -1,57 +1,140 @@
 import styled from "styled-components";
 import Button from "../../components/UI/Button";
 import TabMenu from "../../components/TabMenu";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Select } from "antd";
+import { HeaderInstance } from "../../api/axios";
 
 const FeedbackWrite = () => {
+    // 학생 리스트
+    const [studentList, setStudentList] = useState([]);
+    const getList = async () => {
+        const accessToken = window.localStorage.getItem("token");
+        await axios
+            .get("http://192.168.0.140:8686/api/class/student", {
+                headers: { Authorization: `Bearer ${accessToken}` },
+            })
+            .then((res) => {
+                console.log(res.data);
+                setStudentList(res.data.content);
+            });
+    };
+    const searchList: { value: number; label: string }[] = studentList.map(
+        (item: { seq: number; name: string }) => {
+            return { value: item.seq, label: item.name };
+        }
+    );
+
+    useEffect(() => {
+        getList();
+    }, []);
+
+    const [title, setTitle] = useState("");
+    console.log(title);
+    const [text, setText] = useState("");
+    console.log(text);
+    console.log(new Date());
+
+    const [studentId, setStudentId] = useState("");
+    console.log(1,studentId);
+
+    const handleChange = () => console.log();
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        let body = {
+            fiTitle: title,
+            fiContent: text,
+            // date: new Date(),
+        };
+
+        HeaderInstance.put(`/api/feedback/${studentId}`, body)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+        setTitle("");
+        setText("");
+    };
+
+    const onChange = (value: string) => {
+        console.log(`selected ${value}`);
+        setStudentId(value);
+    };
+
+    const onSearch = (value: string) => {
+        console.log("search:", value);
+    };
+
     return (
         <>
             <TabMenu menu="게시판" />
-            <FeedbackWriteContainer>
-                <FeedbackWriteBox>
-                    <FeedbackWriteHeader>
-                        <p>선생님</p>
-                        <div style={{ paddingRight: "120px" }}>
-                            <input
-                                type="text"
+            <Select
+                showSearch
+                placeholder="Select a person"
+                optionFilterProp="children"
+                onChange={onChange}
+                onSearch={onSearch}
+                filterOption={(input, option) =>
+                    (option?.label ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase())
+                }
+                options={searchList}
+                style={{ marginTop: 20, marginLeft: 39 }}
+            />
+            <form onSubmit={handleSubmit}>
+                <FeedbackWriteContainer>
+                    <FeedbackWriteBox>
+                        <FeedbackWriteHeader>
+                            <p>선생님</p>
+                            <div style={{ paddingRight: "120px" }}>
+                                <input
+                                    type="text"
+                                    style={{
+                                        width: "650px",
+                                        height: "35px",
+                                        background: "#f3f3f3",
+                                        borderRadius: "5px",
+                                        textAlign: "left",
+                                        paddingLeft: "23px",
+                                        outline: "none",
+                                    }}
+                                    placeholder="제목을 입력해주세요."
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    value={title}
+                                />
+                            </div>
+
+                            <p>날짜</p>
+                        </FeedbackWriteHeader>
+                        <FeedbackWriteBody>
+                            <textarea
                                 style={{
-                                    width: "650px",
-                                    height: "35px",
+                                    width: "80%",
+                                    height: "100%",
+                                    border: "1px solid #eee",
                                     background: "#f3f3f3",
                                     borderRadius: "5px",
-                                    textAlign: "left",
-                                    paddingLeft: "23px",
-                                    outline: "none",
+                                    padding: "20px",
                                 }}
-                                placeholder="제목을 입력해주세요."
-                            />
-                        </div>
-                        <p>날짜</p>
-                    </FeedbackWriteHeader>
-                    <FeedbackWriteBody>
-                        <textarea
+                                placeholder="내용을 입력해주세요."
+                                onChange={(e) => setText(e.target.value)}
+                                value={text}
+                            ></textarea>
+                        </FeedbackWriteBody>
+
+                        <div
                             style={{
-                                width: "80%",
-                                height: "100%",
-                                border: "1px solid #eee",
-                                background: "#f3f3f3",
-                                borderRadius: "5px",
-                                padding: "20px",
+                                display: "flex",
+                                justifyContent: "end",
+                                padding: "0 100px",
+                                marginTop: "50px",
                             }}
-                            placeholder="내용을 입력해주세요."
-                        ></textarea>
-                    </FeedbackWriteBody>
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "end",
-                            padding: "0 100px",
-                            marginTop: "50px",
-                        }}
-                    >
-                        <Button title="등록" />
-                    </div>
-                </FeedbackWriteBox>
-            </FeedbackWriteContainer>
+                        >
+                            <Button title="등록" />
+                        </div>
+                    </FeedbackWriteBox>
+                </FeedbackWriteContainer>
+            </form>
         </>
     );
 };

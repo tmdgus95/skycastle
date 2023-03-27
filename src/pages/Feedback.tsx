@@ -53,12 +53,7 @@ const columns: ColumnsType<DataType> = [
         fixed: "left",
         className: "ant-table-wrapper",
         render: (text, record) => (
-            <Link
-                to="/teacher/feedback/titleid
-        "
-            >
-                {text}
-            </Link>
+            <Link to={`/teacher/feedback/${record.writingNumber}`}>{text}</Link>
         ),
     },
 
@@ -85,7 +80,6 @@ const columns: ColumnsType<DataType> = [
 
 const FeedBack: React.FC = () => {
     const [list, setList] = useState([]);
-    const { titleid } = useParams();
 
     const dataFetch = () => {
         HeaderInstance.get(`/api/feedback/list?page=0`)
