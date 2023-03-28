@@ -7,53 +7,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import moment from "moment";
 
-// const bardata = [
-//   {
-//     country: "A반",
-//     듣기: 24,
-//     듣기Color: "hsl(131, 70%, 50%)",
-//     독해: 25,
-//     독해Color: "hsl(19, 70%, 50%)",
-//     문법: 25,
-//     문법Color: "hsl(138, 70%, 50%)",
-//     어휘: 23,
-//     어휘Color: "hsl(226, 70%, 50%)",
-//   },
-//   {
-//     country: "B반",
-//     듣기: 20,
-//     듣기Color: "hsl(331, 70%, 50%)",
-//     독해: 20,
-//     독해Color: "hsl(259, 70%, 50%)",
-//     문법: 21,
-//     문법Color: "hsl(52, 70%, 50%)",
-//     어휘: 19,
-//     어휘Color: "hsl(272, 70%, 50%)",
-//   },
-//   {
-//     country: "C반",
-//     듣기: 20,
-//     듣기Color: "hsl(330, 70%, 50%)",
-//     독해: 19,
-//     독해Color: "hsl(157, 70%, 50%)",
-//     문법: 17,
-//     문법Color: "hsl(217, 70%, 50%)",
-//     어휘: 15,
-//     어휘Color: "hsl(79, 70%, 50%)",
-//   },
-//   {
-//     country: "D반",
-//     듣기: 15,
-//     듣기Color: "hsl(72, 70%, 50%)",
-//     독해: 16,
-//     독해Color: "hsl(340, 70%, 50%)",
-//     문법: 15,
-//     문법Color: "hsl(157, 70%, 50%)",
-//     어휘: 10,
-//     어휘Color: "hsl(2, 70%, 50%)",
-//   },
-// ];
-
 const AllAverage = () => {
   // 평균 데이터
   const [allAvg, setAllAvg] = useState([]);
@@ -200,7 +153,7 @@ const AllAverage = () => {
           />
         </TInner>
         <Inner>
-          <p>&#8226; 월별 반 평균 점수</p>
+          <p>&#8226; 이번 달 반 평균 점수</p>
           <ResponsiveBar
             data={classData}
             keys={["독해", "듣기", "문법", "어휘"]}
