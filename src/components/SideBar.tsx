@@ -1,12 +1,10 @@
 import { Menu } from "antd";
 import SubMenu from "antd/es/menu/SubMenu";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { RootState } from "../store/store";
 import { SideBarContainer } from "../styles/Styles";
 
 const SideBar = () => {
-    const role = useSelector((state: RootState) => state.auth.role);
+    const role = window.localStorage.getItem("role");
     console.log("role", role && role);
 
     return (
