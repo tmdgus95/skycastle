@@ -210,27 +210,9 @@ export const TeacherTitle = styled.div`
 
 // 검색창 스타일
 export const SearchStyle = styled.div`
-  .ant-select-selector {
+  .ant-select {
     width: 200px;
     margin: 2% 0 0 3%;
-    border: 1px solid ${(props) => props.theme.colors.pointColor};
     border-radius: 8px;
-    .ant-input {
-      background: transparent;
-      box-shadow: none;
-      border: none;
-    }
-    .ant-input-group-addon {
-      .ant-btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #fff;
-        box-shadow: none;
-        border: none;
-        /* border-left: none !important;
-                border-color: ${(props) => props.theme.colors.pointColor}; */
-      }
-    }
   }
 `;
