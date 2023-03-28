@@ -6,7 +6,6 @@ const Header = () => {
     const navigate = useNavigate();
     const name = window.localStorage.getItem("name");
     const role = window.localStorage.getItem("role");
-    console.log("name", name);
 
     const handleLogout = () => {
         window.localStorage.removeItem("token");

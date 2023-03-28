@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { HeaderInstance } from "../../api/axios";
+import { HeaderInstance, LoginInstance } from "../../api/axios";
 import { GoSearch } from "react-icons/go";
+import { FaDownload } from "react-icons/fa";
 import TabMenu from "../../components/TabMenu";
 import Button from "../../components/UI/Button";
 import ChangeClassModal from "../../components/modal/ChangeClassModal";
@@ -11,12 +12,17 @@ type User = {
     email: string;
     name: string;
     regDt: string;
-    role: string;
+    className: string;
     seq: number;
 };
 
 export default function ChangeClass() {
     const [userList, setUserList] = useState<User[]>([]);
+    const [userInfo, setUserInfo] = useState({
+        seq: 0,
+        className: "",
+        name: "",
+    });
 
     const fetchUserList = async () => {
         try {
@@ -31,6 +37,12 @@ export default function ChangeClass() {
     useEffect(() => {
         fetchUserList();
     }, []);
+
+    const handleDown = () => {
+        LoginInstance.get("/api/class/excel")
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+    };
     return (
         <section>
             <TabMenu menu="반 변경" />
@@ -47,19 +59,23 @@ export default function ChangeClass() {
                 </thead>
                 <tbody>
                     {userList.map(
-                        ({ role, name, email, birth, regDt, seq }) => {
+                        ({ className, name, email, birth, regDt, seq }) => {
                             return (
                                 <tr key={seq}>
                                     <td>
                                         <input
                                             name={seq.toString()}
                                             type="checkbox"
-                                            onChange={(e) =>
-                                                console.log(e.target.name)
-                                            }
+                                            onChange={(e) => {
+                                                setUserInfo({
+                                                    seq,
+                                                    className,
+                                                    name,
+                                                });
+                                            }}
                                         />
                                     </td>
-                                    <td>{role}</td>
+                                    <td>{className}</td>
                                     <td>{name}</td>
                                     <td>{birth}</td>
                                     <td>{email}</td>
@@ -75,7 +91,14 @@ export default function ChangeClass() {
                 <input type="text" placeholder="이름을 검색하세요." />
                 <Button title="반 변경" />
             </ManageForm>
-            <ChangeClassModal />
+            <div className="flex items-center text-2xl ml-9">
+                <FaDownload
+                    onClick={handleDown}
+                    className="mr-4 text-green-400"
+                />
+                <button onClick={handleDown}>변경 반 엑셀 다운로드</button>
+            </div>
+            <ChangeClassModal userInfo={userInfo} />
         </section>
     );
 }
