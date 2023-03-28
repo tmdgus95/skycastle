@@ -3,7 +3,8 @@ import TabMenu from "../../components/TabMenu";
 import Button from "../../components/UI/Button";
 import { GoSearch } from "react-icons/go";
 import { HeaderInstance } from "../../api/axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery, useMutation } from "react-query";
 
 type User = {
     birth: string;
@@ -15,47 +16,43 @@ type User = {
 };
 
 const ManagementUser = () => {
-    const [userList, setUserList] = useState<User[]>([]);
     const [deleteUser, setDeleteUser] = useState(0);
     const [searchName, setSearchName] = useState("");
-
-    const fetchUserList = async () => {
-        const address =
-            searchName === ""
-                ? "/api/member/list"
-                : `/api/member/list?keyword=${searchName}`;
-        try {
+    const { data: userList = [] } = useQuery<User[]>(
+        ["userList", searchName],
+        async () => {
+            const address =
+                searchName === ""
+                    ? "/api/member/list"
+                    : `/api/member/list?keyword=${searchName}`;
             const res = await HeaderInstance.get(address);
-            console.log(res);
-            setUserList(res.data.memberList);
-        } catch (error) {
-            console.log(error);
+            return res.data.memberList;
         }
-    };
+    );
 
-    useEffect(() => {
-        fetchUserList();
-    }, [searchName]);
+    const { mutate: deleteUserMutation } = useMutation((seq: number) =>
+        HeaderInstance.get(`/api/member/drop?seq=${seq}`)
+    );
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(setSearchName(e.target.value));
+        setSearchName(e.target.value);
     };
     const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(parseInt(e.target.name));
         setDeleteUser(parseInt(e.target.name));
     };
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        HeaderInstance.get(`/api/member/drop?seq=${deleteUser}`)
-            .then((res) => {
+        deleteUserMutation(deleteUser, {
+            onSuccess: (res) => {
                 console.log(res);
                 if (res.data.message === "이미 탈퇴 상태 입니다.") {
                     alert(res.data.message);
                 } else {
                     alert("회원탈퇴가 완료되었습니다.");
                 }
-            })
-            .catch((err) => console.log(err));
+            },
+            onError: (err) => console.log(err),
+        });
     };
     return (
         <>

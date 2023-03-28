@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import styled from "styled-components";
-import { HeaderInstance, LoginInstance } from "../../api/axios";
+import { HeaderInstance } from "../../api/axios";
 import { GoSearch } from "react-icons/go";
 import { FaDownload } from "react-icons/fa";
 import TabMenu from "../../components/TabMenu";
 import ChangeClassModal from "../../components/modal/ChangeClassModal";
+import { useState } from "react";
 
 type User = {
     birth: string;
@@ -16,7 +17,14 @@ type User = {
 };
 
 export default function ChangeClass() {
-    const [userList, setUserList] = useState<User[]>([]);
+    const { data: userList = [] } = useQuery<User[]>(
+        "/api/member/stu/list",
+        async () => {
+            const res = await HeaderInstance.get("/api/member/stu/list");
+            return res.data.studentList;
+        }
+    );
+
     const [userInfo, setUserInfo] = useState({
         seq: 0,
         className: "",
@@ -24,25 +32,6 @@ export default function ChangeClass() {
     });
     const [modal, setModal] = useState(false);
 
-    const fetchUserList = async () => {
-        try {
-            const res = await HeaderInstance.get("/api/member/stu/list");
-            console.log(res);
-            setUserList(res.data.studentList);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    useEffect(() => {
-        fetchUserList();
-    }, []);
-
-    const handleDown = () => {
-        LoginInstance.get("/api/class/excel")
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
-    };
     return (
         <section>
             <TabMenu menu="반 변경" />
@@ -105,10 +94,7 @@ export default function ChangeClass() {
                     target="_blank"
                     rel="noreferrer"
                 >
-                    <FaDownload
-                        onClick={handleDown}
-                        className="mr-4 text-green-400"
-                    />
+                    <FaDownload className="mr-4 text-green-400" />
                     <p>변경 반 엑셀 다운로드</p>
                 </a>
             </div>
