@@ -91,12 +91,19 @@ export default function ChangeClass() {
                 <input type="text" placeholder="이름을 검색하세요." />
                 <Button title="반 변경" />
             </ManageForm>
-            <div className="flex items-center text-2xl ml-9">
-                <FaDownload
-                    onClick={handleDown}
-                    className="mr-4 text-green-400"
-                />
-                <button onClick={handleDown}>변경 반 엑셀 다운로드</button>
+            <div>
+                <a
+                    className="flex items-center text-2xl ml-9"
+                    href="http://192.168.0.140:8686/api/class/excel"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <FaDownload
+                        onClick={handleDown}
+                        className="mr-4 text-green-400"
+                    />
+                    <p>변경 반 엑셀 다운로드</p>
+                </a>
             </div>
             <ChangeClassModal userInfo={userInfo} />
         </section>
