@@ -1,17 +1,17 @@
 import { HeaderContainer } from "../styles/Styles";
 import { BsFillPersonFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
 
 const Header = () => {
     const navigate = useNavigate();
-    const name = useSelector((state: RootState) => state.auth.name);
-    const role = useSelector((state: RootState) => state.auth.role);
+    const name = window.localStorage.getItem("name");
+    const role = window.localStorage.getItem("role");
     console.log("name", name);
 
     const handleLogout = () => {
         window.localStorage.removeItem("token");
+        window.localStorage.removeItem("name");
+        window.localStorage.removeItem("role");
         alert("로그아웃되었습니다.");
         navigate("/");
     };

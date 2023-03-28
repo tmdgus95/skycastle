@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoginInstance } from "../api/axios";
 import LoginBoder from "../components/UI/LoginBoder";
-import { setName, setRole } from "../store/slice/userSlice";
 import { LoginContainer } from "../styles/Styles";
 
 export interface FormEvent extends React.FormEvent {
@@ -12,7 +10,6 @@ export interface FormEvent extends React.FormEvent {
 export interface FormEventSubmit extends React.FormEvent<HTMLFormElement> {}
 
 const Login = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [loginUser, setLoginUser] = useState({ id: "", pwd: "" });
     const handelChange = (e: FormEvent) => {
@@ -34,8 +31,8 @@ const Login = () => {
             const name = res.data.name;
 
             window.localStorage.setItem("token", accessToken);
-            dispatch(setRole(role));
-            dispatch(setName(name));
+            window.localStorage.setItem("role", role);
+            window.localStorage.setItem("name", name);
 
             if (res.data.role === "MASTER") {
                 navigate("/master/create");
