@@ -4,7 +4,6 @@ import { HeaderInstance, LoginInstance } from "../../api/axios";
 import { GoSearch } from "react-icons/go";
 import { FaDownload } from "react-icons/fa";
 import TabMenu from "../../components/TabMenu";
-import Button from "../../components/UI/Button";
 import ChangeClassModal from "../../components/modal/ChangeClassModal";
 
 type User = {
@@ -23,6 +22,7 @@ export default function ChangeClass() {
         className: "",
         name: "",
     });
+    const [modal, setModal] = useState(false);
 
     const fetchUserList = async () => {
         try {
@@ -89,8 +89,15 @@ export default function ChangeClass() {
             <ManageForm>
                 <StyledGoSearch />
                 <input type="text" placeholder="이름을 검색하세요." />
-                <Button title="반 변경" />
             </ManageForm>
+            <button
+                className="absolute top-[950px] right-10 p-4 border rounded-full border-menuColor text-mainColor bg-menuColor hover:text-white hover:bg-mainColor"
+                onClick={() => {
+                    setModal(!modal);
+                }}
+            >
+                반 병경
+            </button>
             <div>
                 <a
                     className="flex items-center text-2xl ml-9"
@@ -105,7 +112,9 @@ export default function ChangeClass() {
                     <p>변경 반 엑셀 다운로드</p>
                 </a>
             </div>
-            <ChangeClassModal userInfo={userInfo} />
+            {modal && (
+                <ChangeClassModal setModal={setModal} userInfo={userInfo} />
+            )}
         </section>
     );
 }
@@ -141,13 +150,10 @@ const ManageForm = styled.form`
         outline: none;
         padding-left: 30px;
     }
-    button {
-        margin-top: 46px;
-    }
 `;
 const StyledGoSearch = styled(GoSearch)`
     position: absolute;
-    top: 32px;
+    top: 5px;
     left: 45px;
     font-size: 20px;
 `;

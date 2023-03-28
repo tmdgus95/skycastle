@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 interface Props {
     title: string;
+    onClick?: () => void;
 }
 
 function Button({ title }: Props) {
@@ -19,7 +20,6 @@ const Button1 = styled.button`
     font-size: 24px;
     line-height: 29px;
     color: ${(props) => props.theme.colors.pointColor};
-    
 
     &:hover {
         background-color: ${(props) => props.theme.colors.pointColor};
