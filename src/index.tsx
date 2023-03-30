@@ -72,7 +72,7 @@ const router = createBrowserRouter([
         children: [
             { path: "allaverage", element: <AllAverage /> },
             { path: "studentavg", element: <StudentAvg /> },
-            { path: "gradelist", element: <GradeList /> },
+            { path: "gradelist", element: <Gradelist /> },
             { path: "feedback", element: <Feedback /> },
             { path: "feedback/write", element: <FeedbackWrite /> },
             { path: "feedback/writeedit", element: <FeedbackWriteEdit /> },
@@ -80,7 +80,6 @@ const router = createBrowserRouter([
             { path: "mypage", element: <Mypage /> },
         ],
     },
-
 ]);
 
 const queryClient = new QueryClient();
