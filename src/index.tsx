@@ -21,10 +21,10 @@ import CreateUser from "./pages/master/CreateUser";
 import ManagementUser from "./pages/master/ManagementUser";
 import FindId from "./pages/FindId";
 import FindPassword from "./pages/FindPassword";
-import GradeList from "./pages/teacher/GradeList";
 import AllAverage from "./pages/teacher/AllAverage";
 import StudentAvg from "./pages/teacher/StudentAvg";
 import ChangeClass from "./pages/master/ChangeClass";
+
 import FeedbackWriteEdit from "./pages/teacher/FeedbackWriteEdit";
 
 const router = createBrowserRouter([
@@ -80,6 +80,7 @@ const router = createBrowserRouter([
             { path: "mypage", element: <Mypage /> },
         ],
     },
+
 ]);
 
 const queryClient = new QueryClient();
