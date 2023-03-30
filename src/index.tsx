@@ -21,10 +21,10 @@ import CreateUser from "./pages/master/CreateUser";
 import ManagementUser from "./pages/master/ManagementUser";
 import FindId from "./pages/FindId";
 import FindPassword from "./pages/FindPassword";
-import GradeList from "./pages/teacher/GradeList";
 import AllAverage from "./pages/teacher/AllAverage";
 import StudentAvg from "./pages/teacher/StudentAvg";
 import ChangeClass from "./pages/master/ChangeClass";
+import GradeRegist from "./pages/teacher/GradeRegist";
 
 const router = createBrowserRouter([
   {
@@ -71,7 +71,7 @@ const router = createBrowserRouter([
     children: [
       { path: "allaverage", element: <AllAverage /> },
       { path: "studentavg", element: <StudentAvg /> },
-      { path: "gradelist", element: <GradeList /> },
+      { path: "graderegist", element: <GradeRegist /> },
       { path: "feedback", element: <Feedback /> },
       { path: "feedback/write", element: <FeedbackWrite /> },
       { path: "feedback/:titleId", element: <FeedbackDetail /> },

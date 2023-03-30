@@ -200,6 +200,31 @@ export const TInner = styled.div`
   }
 `;
 
+// 차트 DatePicker
+export const DateCss = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 5%;
+  top: 5%;
+  z-index: 10;
+  font-size: 24px;
+  .ant-picker {
+    width: 30%;
+    padding: 0;
+    .ant-picker-input {
+      input {
+        color: ${(props) => props.theme.colors.mainColor};
+        font-size: 24px;
+        font-weight: 500;
+      }
+      .ant-picker-suffix {
+        display: none;
+      }
+    }
+  }
+`;
+
 // 타이틀
 export const TeacherTitle = styled.div`
   display: flex;
