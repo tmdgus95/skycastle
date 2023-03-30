@@ -7,17 +7,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { HeaderInstance } from "../api/axios";
-
-// axios
-//     .get("HeaderInstance/feedback/list")
-//     .then((response) => {
-//         // 요청이 성공했을 때 실행할 코드
-//         console.log(response.data);
-//     })
-//     .catch((error) => {
-//         // 요청이 실패했을 때 실행할 코드
-//         console.error(error);
-//     });
+import styled from "styled-components";
 
 interface DataType {
     key: React.Key;
@@ -27,58 +17,73 @@ interface DataType {
     date: string;
 }
 
-const columns: ColumnsType<DataType> = [
-    {
-        title: "글번호",
-
-        width: 40,
-        dataIndex: "writingNumber",
-        key: "writingNumber",
-        fixed: "left",
-        className: "ant-table-wrapper",
-    },
-    {
-        title: "작성자",
-        width: 55,
-        dataIndex: "name",
-        key: "name",
-        fixed: "left",
-        className: "ant-table-wrapper",
-    },
-    {
-        title: "글내용",
-        dataIndex: "contents",
-        key: "1",
-        width: 140,
-        fixed: "left",
-        className: "ant-table-wrapper",
-        render: (text, record) => (
-            <Link to={`/teacher/feedback/${record.writingNumber}`}>{text}</Link>
-        ),
-    },
-
-    {
-        title: "작성날짜",
-        key: "operation",
-        fixed: "right",
-        width: 70,
-        className: "ant-table-wrapper",
-        dataIndex: "date",
-    },
-];
-
-// const data: DataType[] = [];
-// for (let i = 0; i < 100; i++) {
-//     data.push({
-//         key: i,
-//         writingNumber: `${i}`,
-//         name: `선생님`,
-//         contents: `승현이 메롱`,
-//         date: `London Park no. ${i}`,
-//     });
-// }
-
 const FeedBack: React.FC = () => {
+    const columns: ColumnsType<DataType> = [
+        {
+            title: "글번호",
+
+            width: 40,
+            dataIndex: "writingNumber",
+            key: "writingNumber",
+            fixed: "left",
+            className: "ant-table-wrapper",
+        },
+        {
+            title: "작성자",
+            width: 55,
+            dataIndex: "name",
+            key: "name",
+            fixed: "left",
+            className: "ant-table-wrapper",
+        },
+        {
+            title: "글내용",
+            dataIndex: "contents",
+            key: "1",
+            width: 140,
+            fixed: "left",
+            className: "ant-table-wrapper",
+            render: (text, record) => (
+                <Link to={`/teacher/feedback/${record.writingNumber}`}>
+                    {text}
+                </Link>
+            ),
+        },
+
+        {
+            title: "작성날짜",
+            key: "operation",
+            fixed: "right",
+            width: 70,
+            className: "ant-table-wrapper",
+            dataIndex: "date",
+        },
+        {
+            title: "삭제",
+            key: "operation",
+            fixed: "right",
+            width: 70,
+            className: "ant-table-wrapper",
+            dataIndex: "date",
+            render: (text, record) => (
+                <button onClick={() => deleteList(record.writingNumber)}
+                style={{}}>
+                    X
+                </button>
+            ),
+        },
+    ];
+    const deleteList = (seq: any) => {
+        if (window.confirm("삭제하시겠습니까?")) {
+            HeaderInstance.delete(`/api/feedback/delete/${seq}`)
+                .then((res) => {
+                    console.log(res);
+                    dataFetch();
+                })
+                .catch((err) => console.log(err));
+        }
+    };
+
     const [list, setList] = useState([]);
 
     const dataFetch = () => {
@@ -119,7 +124,7 @@ const FeedBack: React.FC = () => {
     return (
         <>
             <TabMenu menu="게시판" />
-            <div>
+            <Wrap>
                 <style>
                     {`
          .ant-table-wrapper .ant-table-thead > tr > th, .ant-table-wrapper .ant-table-thead > tr > td {
@@ -158,9 +163,16 @@ const FeedBack: React.FC = () => {
                         <Button title="등록" />
                     </Link>
                 </div>
-            </div>
+            </Wrap>
         </>
     );
 };
+
+const Wrap = styled.div`
+    @media screen and (max-width: 715px) {
+        min-width: 595px;
+        min-height: 737px;
+    }
+`;
 
 export default FeedBack;
