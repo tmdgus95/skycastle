@@ -25,7 +25,6 @@ const StudentAvg = () => {
     name: "",
   });
   const [weeknessSubject, setWeeknessSubject] = useState("");
-
   const getList = async () => {
     const accessToken = window.localStorage.getItem("token");
     await axios
@@ -38,7 +37,6 @@ const StudentAvg = () => {
         setDefaultStudent(res.data.content[0]);
       });
   };
-
   const defaultChart = async () => {
     const accessToken = window.localStorage.getItem("token");
     await axios
@@ -60,7 +58,7 @@ const StudentAvg = () => {
         }
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setMonthlyGrade(res.data.scoreList);
         setWeeknessSubject(res.data.weeknessSubject);
       });

@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Table, Form, Input, Button, DatePicker, DatePickerProps } from "antd";
+import {
+  Table,
+  Form,
+  Button,
+  DatePicker,
+  DatePickerProps,
+  InputNumber,
+} from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { GradeRegistContainer } from "../../styles/TeacherStyles";
 import Search from "antd/es/input/Search";
@@ -58,7 +65,9 @@ const columns: ColumnsType<DataType> = [
               },
             ]}
           >
-            <Input
+            <InputNumber
+              min={0}
+              max={100}
               size="small"
               style={{
                 width: 80,
@@ -84,7 +93,9 @@ const columns: ColumnsType<DataType> = [
               },
             ]}
           >
-            <Input
+            <InputNumber
+              min={0}
+              max={100}
               size="small"
               style={{
                 width: 80,
@@ -110,7 +121,9 @@ const columns: ColumnsType<DataType> = [
               },
             ]}
           >
-            <Input
+            <InputNumber
+              min={0}
+              max={100}
               size="small"
               style={{
                 width: 80,
@@ -136,7 +149,9 @@ const columns: ColumnsType<DataType> = [
               },
             ]}
           >
-            <Input
+            <InputNumber
+              min={0}
+              max={100}
               size="small"
               style={{
                 width: 80,
@@ -193,7 +208,6 @@ const GradeRegist = () => {
   //     selectedRowKeys,
   //     onChange: onSelectChange,
   //   };
-  const defaultMonth = moment(new Date()).format("YYYY/MM");
 
   // 학생 리스트
   const [studentList, setStudentList] = useState([]);
@@ -231,24 +245,38 @@ const GradeRegist = () => {
   console.log(list);
 
   // 날짜
+  const defaultMonth = moment(new Date()).format("YYYY/MM");
   const [onDate, setOnDate] = useState<string>(
     moment(new Date()).format("YYYYMM")
   );
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    console.log(date);
+    // console.log(date);
     setOnDate(moment(dateString).format("YYYYMM"));
-    console.log(dateString);
+    // console.log(dateString);
   };
-  console.log(onDate);
+  // console.log(onDate);
   // console.log(moment(onDate).format("YYYYMM"));
 
   // 제출
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     // console.log("Success:", values);
+    const accessToken = window.localStorage.getItem("token");
     const body = {
       yearmonth: onDate,
       addGradeVO: values.user,
     };
+    await axios
+      .put("http://192.168.0.140:8686/api/grade/put", body, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        alert("성적이 입력되었습니다!");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("성적 입력이 실패했습니다.");
+      });
     console.log(body);
   };
 
@@ -269,8 +297,8 @@ const GradeRegist = () => {
           columns={columns}
           dataSource={list}
           footer={() => (
-            <div className="flex justify-between">
-              <Search placeholder="이름을 입력하세요" onSearch={onSearch} />
+            <div className="flex justify-end">
+              {/* <Search placeholder="이름을 입력하세요" onSearch={onSearch} /> */}
               <div className="flex gap-2">
                 {/* <button className="grade-bt" onClick={handleWriteChange}>
                   취소
