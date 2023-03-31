@@ -188,11 +188,14 @@ const Input = styled.input`
     @media screen and (max-width: 1560px) {
         width: 500px;
     }
-    @media screen and (max-width: 1260px) {
+    @media screen and (max-width: 1430px) {
         width: 400px;
     }
-    @media screen and (max-width: 1065px) {
+    @media screen and (max-width: 1260px) {
         width: 350px;
+    }
+    @media screen and (max-width: 1080px) {
+        width: 300px;
     }
 `;
 const FeedbackWriteBody = styled.div`
