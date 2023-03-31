@@ -17,14 +17,21 @@ type User = {
 };
 
 export default function ChangeClass() {
+    const [page, setPage] = useState(0);
+    const [activePage, setActivePage] = useState(0);
     const { data: userList = [] } = useQuery<User[]>(
-        "/api/member/stu/list",
+        `/api/member/stu/list?page=${page}`,
         async () => {
-            const res = await HeaderInstance.get("/api/member/stu/list");
+            const res = await HeaderInstance.get(
+                `/api/member/stu/list?page=${page}`
+            );
             return res.data.studentList;
         }
     );
-
+    const handlePageClick = (pageNumber: number) => {
+        setPage(pageNumber);
+        setActivePage(pageNumber);
+    };
     const [userInfo, setUserInfo] = useState({
         seq: 0,
         className: "",
@@ -79,6 +86,21 @@ export default function ChangeClass() {
                 <StyledGoSearch />
                 <input type="text" placeholder="이름을 검색하세요." />
             </ManageForm>
+            <div className="text-center">
+                {[...Array(10)].map((_, index) => (
+                    <button
+                        className={`p-2 m-2 rounded-3xl hover:bg-blue-600 ${
+                            activePage === index
+                                ? "bg-red-500 text-white"
+                                : "bg-blue-100"
+                        }`}
+                        key={index}
+                        onClick={() => handlePageClick(index)}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+            </div>
             <button
                 className="absolute top-[950px] right-10 p-4 border rounded-full border-menuColor text-mainColor bg-menuColor hover:text-white hover:bg-mainColor"
                 onClick={() => {
