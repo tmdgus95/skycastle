@@ -101,10 +101,10 @@ const ManagementUser = () => {
             <div className="text-center">
                 {[...Array(10)].map((_, index) => (
                     <button
-                        className={`p-1.5 m-1.5 rounded-3xl hover:bg-blue-600 ${
+                        className={`p-1.5 m-1.5 rounded-3xl hover:bg-pointColor ${
                             activePage === index
-                                ? "bg-red-500 text-white"
-                                : "bg-blue-100"
+                                ? "bg-mainColor text-white"
+                                : "bg-menuColor"
                         }`}
                         key={index}
                         onClick={() => handlePageClick(index)}

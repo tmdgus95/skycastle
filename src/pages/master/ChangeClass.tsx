@@ -89,10 +89,10 @@ export default function ChangeClass() {
             <div className="text-center">
                 {[...Array(10)].map((_, index) => (
                     <button
-                        className={`p-2 m-2 rounded-3xl hover:bg-blue-600 ${
+                        className={`p-2 m-2 rounded-3xl hover:bg-pointColor ${
                             activePage === index
-                                ? "bg-red-500 text-white"
-                                : "bg-blue-100"
+                                ? "bg-mainColor text-white"
+                                : "bg-menuColor"
                         }`}
                         key={index}
                         onClick={() => handlePageClick(index)}
