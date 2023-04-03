@@ -146,7 +146,7 @@ const StudentAvg = () => {
       </TeacherTitle>
       <TeacherChart>
         <Inner>
-          <p>&#8226; 이번달 {defaultStudent.name} 학생 점수</p>
+          <p>&#8226; 최근 {defaultStudent.name} 학생 점수</p>
           <ResponsiveRadar
             // data={thisMonthScore}
             data={studentSelect}
