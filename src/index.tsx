@@ -26,6 +26,7 @@ import StudentAvg from "./pages/teacher/StudentAvg";
 import ChangeClass from "./pages/master/ChangeClass";
 
 import FeedbackWriteEdit from "./pages/teacher/FeedbackWriteEdit";
+import GradeRegist from "./pages/teacher/GradeRegist";
 
 const router = createBrowserRouter([
     {
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
         children: [
             { path: "allaverage", element: <AllAverage /> },
             { path: "studentavg", element: <StudentAvg /> },
-            { path: "gradelist", element: <Gradelist /> },
+            { path: "gradelist", element: <GradeRegist /> },
             { path: "feedback", element: <Feedback /> },
             { path: "feedback/write", element: <FeedbackWrite /> },
             { path: "feedback/writeedit", element: <FeedbackWriteEdit /> },
