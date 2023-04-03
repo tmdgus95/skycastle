@@ -208,15 +208,15 @@ export const DateCss = styled.div`
   left: 5%;
   top: 5%;
   z-index: 10;
-  font-size: 24px;
+  font-size: 25px;
   .ant-picker {
-    width: 30%;
+    width: 43%;
     padding: 0;
     .ant-picker-input {
       input {
         color: ${(props) => props.theme.colors.mainColor};
         font-size: 24px;
-        font-weight: 500;
+        font-weight: 600;
       }
       .ant-picker-suffix {
         display: none;

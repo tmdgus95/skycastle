@@ -22,7 +22,7 @@ const AllAverage = () => {
   const [selectMonth, setSelectMonth] = useState(defaultMonth);
 
   const onChange: DatePickerProps["onChange"] = async (date, dateString) => {
-    setSelectMonth(moment(dateString).format("YYYYMM"));
+    setSelectMonth(dateString.replace(/\D/g, ""));
   };
 
   // console.log(selectMonth);
@@ -194,6 +194,7 @@ const AllAverage = () => {
             <DatePicker
               defaultValue={dayjs(defaultMonth, "YYYYMM")}
               picker="month"
+              format="YYYY년 MM월"
               bordered={false}
               allowClear={false}
               onChange={onChange}

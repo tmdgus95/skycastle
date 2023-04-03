@@ -7,6 +7,7 @@ export const FlexContainer = styled.div`
 `;
 // 사이드바
 export const SideBarContainer = styled.div`
+  position: fixed;
   width: 17%;
   height: 100vh;
   background-color: ${(props) => props.theme.colors.mainColor};
@@ -21,24 +22,16 @@ export const SideBarContainer = styled.div`
   .sidebar-menu {
     background-color: ${(props) => props.theme.colors.mainColor};
     color: ${(props) => props.theme.colors.white};
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 400;
+    svg {
+      display: inline-block;
+    }
     .ant-menu-title-content:hover {
       color: ${(props) => props.theme.colors.white};
     }
-    .ant-menu-submenu:hover {
-      color: ${(props) => props.theme.colors.white};
-      .ant-menu-submenu-arrow {
-        color: ${(props) => props.theme.colors.white};
-      }
-    }
-    .jbwCWW {
-      background-color: #495a5f;
-    }
-    .ant-menu-submenu-selected {
-      .ant-menu-submenu-title {
-        color: ${(props) => props.theme.colors.white};
-      }
+    .ant-menu-item:hover {
+      background-color: #495a5f !important;
     }
     .ant-menu-item-selected {
       background-color: #495a5f;
@@ -50,6 +43,7 @@ export const SideBarContainer = styled.div`
 // 메인화면
 export const MainContentsContainer = styled.div`
   width: 83%;
+  margin-left: 17%;
 `;
 
 // 헤더

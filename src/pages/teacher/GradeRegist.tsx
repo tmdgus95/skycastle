@@ -226,7 +226,7 @@ const GradeRegist = () => {
     getPosts();
   }, []);
 
-  console.log(studentList);
+  // console.log(studentList);
 
   const list: DataType[] = studentList.map(
     (item: { seq: number; name: string }, index) => {
@@ -242,7 +242,7 @@ const GradeRegist = () => {
     }
   );
 
-  console.log(list);
+  // console.log(list);
 
   // 날짜
   const defaultMonth = moment(new Date()).format("YYYY/MM");
@@ -250,12 +250,8 @@ const GradeRegist = () => {
     moment(new Date()).format("YYYYMM")
   );
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    // console.log(date);
-    setOnDate(moment(dateString).format("YYYYMM"));
-    // console.log(dateString);
+    setOnDate(dateString.replace(/\D/g, ""));
   };
-  // console.log(onDate);
-  // console.log(moment(onDate).format("YYYYMM"));
 
   // 제출
   const onFinish = async (values: any) => {
@@ -277,7 +273,6 @@ const GradeRegist = () => {
         console.log(err);
         alert("성적 입력이 실패했습니다.");
       });
-    console.log(body);
   };
 
   return (
@@ -285,7 +280,7 @@ const GradeRegist = () => {
       <DatePicker
         defaultValue={dayjs(defaultMonth, "YYYY/MM")}
         picker="month"
-        format={"YYYY-MM"}
+        format="YYYY년 MM월"
         bordered={false}
         allowClear={false}
         onChange={onChange}
