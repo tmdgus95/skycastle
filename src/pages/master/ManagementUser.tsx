@@ -18,18 +18,25 @@ type User = {
 const ManagementUser = () => {
     const [deleteUser, setDeleteUser] = useState(0);
     const [searchName, setSearchName] = useState("");
-    const { data: userList = [] } = useQuery<User[]>(
+    const [page, setPage] = useState(0);
+    const [activePage, setActivePage] = useState(0);
+    const { data: userList = [], refetch } = useQuery<User[]>(
         ["userList", searchName],
         async () => {
             const address =
                 searchName === ""
-                    ? "/api/member/list"
-                    : `/api/member/list?keyword=${searchName}`;
+                    ? `/api/member/list?page=${page}`
+                    : `/api/member/list?page=${page}&keyword=${searchName}`;
             const res = await HeaderInstance.get(address);
             return res.data.memberList;
         }
     );
 
+    const handlePageClick = (pageNumber: number) => {
+        setPage(pageNumber);
+        setActivePage(pageNumber);
+        refetch();
+    };
     const { mutate: deleteUserMutation } = useMutation((seq: number) =>
         HeaderInstance.get(`/api/member/drop?seq=${seq}`)
     );
@@ -91,6 +98,21 @@ const ManagementUser = () => {
                     )}
                 </tbody>
             </ManageTable>
+            <div className="text-center">
+                {[...Array(10)].map((_, index) => (
+                    <button
+                        className={`p-1.5 m-1.5 rounded-3xl hover:bg-blue-600 ${
+                            activePage === index
+                                ? "bg-red-500 text-white"
+                                : "bg-blue-100"
+                        }`}
+                        key={index}
+                        onClick={() => handlePageClick(index)}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+            </div>
             <ManageForm onSubmit={handleSubmit}>
                 <StyledGoSearch />
                 <input

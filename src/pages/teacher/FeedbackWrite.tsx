@@ -5,8 +5,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Select } from "antd";
 import { HeaderInstance } from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const FeedbackWrite = () => {
+    const navigate = useNavigate();
+
+    const name = window.localStorage.getItem("name");
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, "0");
+    const day = today.getDate().toString().padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day}`;
+    // console.log(formattedDate);
+
     // 학생 리스트
     const [studentList, setStudentList] = useState([]);
     const getList = async () => {
@@ -37,7 +48,7 @@ const FeedbackWrite = () => {
     console.log(new Date());
 
     const [studentId, setStudentId] = useState("");
-    console.log(1,studentId);
+    console.log(1, studentId);
 
     const handleChange = () => console.log();
     const handleSubmit = (e: any) => {
@@ -49,7 +60,10 @@ const FeedbackWrite = () => {
         };
 
         HeaderInstance.put(`/api/feedback/${studentId}`, body)
-            .then((res) => console.log(res))
+            .then((res) => {
+                console.log(res);
+                navigate("/teacher/feedback");
+            })
             .catch((err) => console.log(err));
         setTitle("");
         setText("");
@@ -85,26 +99,17 @@ const FeedbackWrite = () => {
                 <FeedbackWriteContainer>
                     <FeedbackWriteBox>
                         <FeedbackWriteHeader>
-                            <p>선생님</p>
-                            <div style={{ paddingRight: "120px" }}>
-                                <input
+                            <p> {name}</p>
+
+                            <div>
+                                <Input
                                     type="text"
-                                    style={{
-                                        width: "650px",
-                                        height: "35px",
-                                        background: "#f3f3f3",
-                                        borderRadius: "5px",
-                                        textAlign: "left",
-                                        paddingLeft: "23px",
-                                        outline: "none",
-                                    }}
                                     placeholder="제목을 입력해주세요."
                                     onChange={(e) => setTitle(e.target.value)}
                                     value={title}
                                 />
                             </div>
-
-                            <p>날짜</p>
+                            <p>{formattedDate}</p>
                         </FeedbackWriteHeader>
                         <FeedbackWriteBody>
                             <textarea
@@ -115,6 +120,7 @@ const FeedbackWrite = () => {
                                     background: "#f3f3f3",
                                     borderRadius: "5px",
                                     padding: "20px",
+                                    outline: "none",
                                 }}
                                 placeholder="내용을 입력해주세요."
                                 onChange={(e) => setText(e.target.value)}
@@ -151,6 +157,10 @@ const FeedbackWriteBox = styled.div`
     height: 80%;
     margin: 100px auto;
     padding: 50px;
+    @media screen and (max-width: 986px) {
+        width: 639px;
+        height: 634px;
+    }
 `;
 const FeedbackWriteHeader = styled.div`
     display: flex;
@@ -163,6 +173,31 @@ const FeedbackWriteHeader = styled.div`
     border-radius: 5px;
     border-bottom: 1px solid #333;
 `;
+
+const Input = styled.input`
+    width: 650px;
+    height: 35px;
+    background: #f3f3f3;
+    border-radius: 5px;
+    text-align: left;
+    padding-left: 23px;
+    outline: none;
+    @media screen and (max-width: 1920px) {
+        width: 600px;
+    }
+    @media screen and (max-width: 1560px) {
+        width: 500px;
+    }
+    @media screen and (max-width: 1430px) {
+        width: 400px;
+    }
+    @media screen and (max-width: 1260px) {
+        width: 350px;
+    }
+    @media screen and (max-width: 1080px) {
+        width: 300px;
+    }
+`;
 const FeedbackWriteBody = styled.div`
     width: 80%;
     height: 100%;
@@ -171,6 +206,12 @@ const FeedbackWriteBody = styled.div`
     text-align: center;
     border-bottom: 1px solid gray;
     outline: none;
+    @media screen and (max-width: 1920px) {
+        width: 78%;
+    }
+    @media screen and (max-width: 1560px) {
+        width: 75%;
+    }
 `;
 
 export default FeedbackWrite;
