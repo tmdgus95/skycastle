@@ -3,9 +3,7 @@ import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import Button from "../components/UI/Button";
 import TabMenu from "../components/TabMenu";
-import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { HeaderInstance } from "../api/axios";
 import styled from "styled-components";
 
@@ -66,8 +64,10 @@ const FeedBack: React.FC = () => {
             className: "ant-table-wrapper",
             dataIndex: "date",
             render: (text, record) => (
-                <button onClick={() => deleteList(record.writingNumber)}
-                style={{}}>
+                <button
+                    onClick={() => deleteList(record.writingNumber)}
+                    style={{}}
+                >
                     X
                 </button>
             ),

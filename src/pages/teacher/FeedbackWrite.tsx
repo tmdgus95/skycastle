@@ -50,9 +50,17 @@ const FeedbackWrite = () => {
     const [studentId, setStudentId] = useState("");
     console.log(1, studentId);
 
-    const handleChange = () => console.log();
     const handleSubmit = (e: any) => {
+        if (title === "") {
+            alert("제목을 입력해주세요^^ 제발~");
+            return;
+        } else if (text === "") {
+            alert("내용을 입력해주세요^^ 제발~");
+            return;
+        }
+
         e.preventDefault();
+
         let body = {
             fiTitle: title,
             fiContent: text,
@@ -61,8 +69,8 @@ const FeedbackWrite = () => {
 
         HeaderInstance.put(`/api/feedback/${studentId}`, body)
             .then((res) => {
-                console.log(res);
                 navigate("/teacher/feedback");
+                console.log(res);
             })
             .catch((err) => console.log(err));
         setTitle("");
