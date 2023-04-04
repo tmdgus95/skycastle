@@ -44,7 +44,13 @@ const FindId = () => {
     return (
         <>
             <FindIdContainer>
-                <h2>학습관리시스템</h2>
+                <div className="flex w-full justify-center  mb-10 ">
+                    <img
+                        className="w-[45%]"
+                        src="/images/Logo.png"
+                        alt="로고"
+                    />
+                </div>
                 <h3>아이디 찾기</h3>
                 <form onSubmit={handleSubmit}>
                     <input

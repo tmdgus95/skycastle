@@ -56,7 +56,13 @@ const Login = () => {
     return (
         <>
             <LoginContainer>
-                <h2>학습관리시스템</h2>
+                <div className="flex w-full justify-center mt-[70px] mb-16 ">
+                    <img
+                        className="w-[45%]"
+                        src="/images/Logo.png"
+                        alt="로고"
+                    />
+                </div>
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"

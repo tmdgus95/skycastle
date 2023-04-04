@@ -41,7 +41,13 @@ const FindPassword = () => {
     return (
         <>
             <FindPasswordContainer>
-                <h2>학습관리시스템</h2>
+                <div className="flex w-full justify-center  mb-10 ">
+                    <img
+                        className="w-[45%]"
+                        src="/images/Logo.png"
+                        alt="로고"
+                    />
+                </div>
                 <h3>비밀번호 찾기</h3>
                 <form onSubmit={handleSubmit}>
                     <input

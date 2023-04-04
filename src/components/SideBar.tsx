@@ -21,7 +21,7 @@ const SideBar = () => {
             <div className="flex w-full justify-center mt-[115px] mb-16 ">
                 <img
                     className="w-[76%]"
-                    src="/images/sideLogo.png"
+                    src="/images/Logo.png"
                     alt="사이드바 로고"
                 />
             </div>

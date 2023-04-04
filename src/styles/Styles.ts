@@ -147,7 +147,7 @@ export const LoginContainer = styled.div`
         color: ${(props) => props.theme.colors.mainColor};
     }
     button:nth-child(1) {
-        top: 650px;
+        top: 640px;
         right: 800px;
         position: absolute;
         font-weight: 400;
@@ -156,7 +156,7 @@ export const LoginContainer = styled.div`
         color: ${(props) => props.theme.colors.white};
     }
     button:nth-child(2) {
-        top: 650px;
+        top: 640px;
         right: 610px;
         position: absolute;
         font-weight: 400;
@@ -174,7 +174,7 @@ export const FindIdContainer = styled(LoginContainer)`
     h3 {
         font-weight: 500;
         font-size: 32px;
-        margin-bottom: 83px;
+        margin-bottom: 50px;
         color: ${(props) => props.theme.colors.white};
     }
     input:nth-child(1) {
@@ -189,11 +189,11 @@ export const FindIdContainer = styled(LoginContainer)`
         margin-bottom: 115px;
     }
     button:nth-child(1) {
-        top: 700px;
+        top: 680px;
         right: 610px;
     }
     button:nth-child(2) {
-        top: 700px;
+        top: 680px;
         right: 770px;
     }
 `;
@@ -206,7 +206,7 @@ export const FindPasswordContainer = styled(LoginContainer)`
     h3 {
         font-weight: 500;
         font-size: 32px;
-        margin-bottom: 83px;
+        margin-bottom: 50px;
         color: ${(props) => props.theme.colors.white};
     }
     input:nth-child(1) {
@@ -221,11 +221,11 @@ export const FindPasswordContainer = styled(LoginContainer)`
         margin-bottom: 115px;
     }
     button:nth-child(1) {
-        top: 700px;
+        top: 680px;
         right: 610px;
     }
     button:nth-child(2) {
-        top: 700px;
+        top: 680px;
         right: 770px;
     }
 `;
