@@ -6,6 +6,7 @@ import { FaDownload } from "react-icons/fa";
 import TabMenu from "../../components/TabMenu";
 import ChangeClassModal from "../../components/modal/ChangeClassModal";
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 type User = {
     birth: string;
@@ -17,17 +18,18 @@ type User = {
 };
 
 export default function ChangeClass() {
+    const navigate = useNavigate();
     const [page, setPage] = useState(0);
+    const { name } = useParams();
+    const [searchName, setSearchName] = useState("");
     const [activePage, setActivePage] = useState(0);
-    const { data: userList = [] } = useQuery<User[]>(
-        `/api/member/stu/list?page=${page}`,
-        async () => {
-            const res = await HeaderInstance.get(
-                `/api/member/stu/list?page=${page}`
-            );
-            return res.data.studentList;
-        }
-    );
+    const url = name
+        ? `/api/member/stu/list?page=${page}&keyword=${name}`
+        : `/api/member/stu/list?page=${page}`;
+    const { data: userList = [] } = useQuery<User[]>(url, async () => {
+        const res = await HeaderInstance.get(url);
+        return res.data.studentList;
+    });
     const handlePageClick = (pageNumber: number) => {
         setPage(pageNumber);
         setActivePage(pageNumber);
@@ -38,6 +40,10 @@ export default function ChangeClass() {
         name: "",
     });
     const [modal, setModal] = useState(false);
+
+    const handleSubmit = () => {
+        navigate(`/master/classchange/${searchName}`);
+    };
 
     return (
         <section>
@@ -82,9 +88,15 @@ export default function ChangeClass() {
                     )}
                 </tbody>
             </ManageTable>
-            <ManageForm>
+            <ManageForm onSubmit={handleSubmit}>
                 <StyledGoSearch />
-                <input type="text" placeholder="이름을 검색하세요." />
+                <input
+                    type="text"
+                    placeholder="이름을 검색하세요."
+                    onChange={(e) => {
+                        setSearchName(e.target.value);
+                    }}
+                />
             </ManageForm>
             <div className="text-center">
                 {[...Array(10)].map((_, index) => (

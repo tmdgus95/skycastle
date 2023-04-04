@@ -52,6 +52,7 @@ const router = createBrowserRouter([
             { path: "create", element: <CreateUser /> },
             { path: "management", element: <ManagementUser /> },
             { path: "classchange", element: <ChangeClass /> },
+            { path: "classchange/:name", element: <ChangeClass /> },
         ],
     },
     {

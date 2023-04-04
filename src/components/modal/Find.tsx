@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { GrClose } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
 
 interface FindProps {
     title: string;
@@ -9,12 +10,18 @@ interface FindProps {
 }
 
 const Find = ({ title, content, id, close }: FindProps) => {
+    const navigation = useNavigate();
     return (
         <FindContainer>
             <div>
                 <p>{title}</p>
                 <button>
-                    <GrClose onClick={close} />
+                    <GrClose
+                        onClick={() => {
+                            close();
+                            navigation("/");
+                        }}
+                    />
                 </button>
             </div>
             <div>
