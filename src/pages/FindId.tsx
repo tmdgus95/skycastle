@@ -26,9 +26,13 @@ const FindId = () => {
 
     const handleSubmit = (e: FormEventSubmit) => {
         e.preventDefault();
-        LoginInstance.post(
-            `/api/member/id?name=${findId.name}&birth=${findId.birth}&email=${findId.email}`
-        )
+        const body = {
+            name: findId.name,
+            birth: findId.birth,
+            email: findId.email,
+        };
+
+        LoginInstance.post("/api/member/id", body)
             .then((res) => {
                 console.log(res);
                 setFindResult(res.data.UserId);
