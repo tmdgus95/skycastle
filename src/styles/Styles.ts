@@ -58,15 +58,17 @@ export const HeaderContainer = styled.div`
         font-size: 24px;
         padding: 0 4px;
     }
+
     span:nth-child(2) {
         padding-top: 5px;
     }
     div {
         display: flex;
         height: 112px;
-        padding: 35px;
+        padding: 35px 35px 35px 0;
         justify-content: end;
         align-items: center;
+
         span {
             font-weight: 700;
             font-size: 24px;
@@ -82,6 +84,14 @@ export const HeaderContainer = styled.div`
             padding: 0 13px;
             font-weight: 500;
             font-size: 24px;
+        }
+        #logout {
+            border-radius: 20px;
+            background: ${(props) => props.theme.colors.menuColor};
+        }
+        #logout:hover {
+            background: ${(props) => props.theme.colors.mainColor};
+            color: ${(props) => props.theme.colors.white};
         }
     }
 `;
