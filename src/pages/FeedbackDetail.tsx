@@ -17,6 +17,7 @@ const FeedbackDetail = () => {
     const dispatch = useDispatch();
     const { titleId } = useParams();
     console.log(titleId);
+    const role = window.localStorage.getItem("role");
 
     const [detailInfo, setDetailInfo] = useState({
         content: "",
@@ -118,12 +119,14 @@ const FeedbackDetail = () => {
                                     right: "10%",
                                 }}
                             >
-                                <Link
-                                    to={"/teacher/feedback/writeedit"}
-                                    state={{ data: titleId }}
-                                >
-                                    <Button title="수정" />
-                                </Link>
+                                {role === "TEACHER" && (
+                                    <Link
+                                        to={"/teacher/feedback/writeedit"}
+                                        state={{ data: titleId }}
+                                    >
+                                        <Button title="수정" />
+                                    </Link>
+                                )}
                             </div>
                         </ReviewContainer>
                     </form>
