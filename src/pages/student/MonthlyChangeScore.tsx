@@ -101,7 +101,7 @@ const MonthlyChangeScore = () => {
 
     return (
         <>
-            <p>&#8226; 월별 내 점수 변화</p>
+            <p>&#8226; <b>월별</b> 내 점수 변화</p>
             <ResponsiveBar
                 data={scoreLists2}
                 keys={["grammar", "vocabulary", "comprehension", "listening"]}
