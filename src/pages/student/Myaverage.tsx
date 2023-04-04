@@ -35,20 +35,28 @@ const Myaverage = () => {
         <>
             <TabMenu menu={"성적 현황"} />
             <Title>
-                <FaBell />
+                <FaBell style={{ color: "#fcc53b" }} />
                 &nbsp;
-                {name ? <span>{name}</span> : <span>이름이 없습니다.</span>}
-                &nbsp;학생, 현재 '{weeknessSubject}' 취약 과목입니다.
+                <b>
+                    {name ? <span>{name}</span> : <span>이름이 없습니다.</span>}
+                </b>
+                &nbsp;학생, 현재
+                <b style={{ color: "firebrick" }}>&nbsp;"{weeknessSubject}"</b>
+                &nbsp;취약 과목입니다.
             </Title>
             <Chart>
                 <Inner>
-                    <ThisMonthScore/>
+                    <ThisMonthScore />
                 </Inner>
                 <Inner>
-                    <MonthlyChangeScore/>
+                    <MonthlyChangeScore />
                 </Inner>
             </Chart>
-            <Analysis>&#8226; {explanation}</Analysis>
+            <Analysis>
+                &#8226; <b>월별 내 점수 변화 분석</b>
+                <br />
+                <p> : {explanation}</p>
+            </Analysis>
         </>
     );
 };
