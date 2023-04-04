@@ -46,7 +46,7 @@ const FeedbackDetail = () => {
 
             .catch((err) => console.log(err));
         setWrite("");
-        alert("등록되었당께");
+        alert("등록되었습니다.");
         getFeedbackData();
     };
 
