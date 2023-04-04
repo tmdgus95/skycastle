@@ -41,7 +41,7 @@ export const SideBarContainer = styled.div`
       background-color: #495a5f;
       color: ${(props) => props.theme.colors.white};
     }
-    .ant-menu-title-content a {
+    .ant-menu-title-content anpm {
       display: flex;
       align-items: center;
     }
