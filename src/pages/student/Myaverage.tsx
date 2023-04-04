@@ -13,7 +13,7 @@ const Myaverage = () => {
     // const name = useSelector((state: RootState) => state.auth.name);
     // console.log("name", name);
 
-    const [explanation, setExplanation] = useState();
+    const [explanation, setExplanation] = useState<string>();
     const [weeknessSubject, setWeeknessSubject] = useState();
     // console.log(scoreLists2 && scoreLists2);
 
@@ -55,7 +55,11 @@ const Myaverage = () => {
             <Analysis>
                 &#8226; <b>월별 내 점수 변화 분석</b>
                 <br />
-                <p> : {explanation}</p>
+                {/* <p> : {explanation}</p> */}
+                {explanation &&
+                    explanation
+                        .split(".")
+                        .map((item, index) => <p key={index}>{item}</p>)}
             </Analysis>
         </>
     );
