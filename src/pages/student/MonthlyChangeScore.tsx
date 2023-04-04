@@ -101,15 +101,13 @@ const MonthlyChangeScore = () => {
 
     return (
         <>
-            <p>
-                &#8226; <b>월별</b> 내 점수 변화
-            </p>
+            <p>&#8226; <b>월별</b> 내 점수 변화</p>
             <ResponsiveBar
                 data={scoreLists2}
                 keys={["grammar", "vocabulary", "comprehension", "listening"]}
                 indexBy="testName"
-                margin={{ top: 100, right: 130, bottom: 50, left: 60 }}
-                padding={0.4}
+                margin={{ top: 100, right: 40, bottom: 50, left: 60 }}
+                padding={0.5}
                 maxValue={400}
                 valueScale={{ type: "linear" }}
                 indexScale={{ type: "band", round: true }}
@@ -121,18 +119,18 @@ const MonthlyChangeScore = () => {
                 axisTop={null}
                 axisRight={null}
                 axisBottom={{
-                    tickSize: 5,
-                    tickPadding: 5,
+                    tickSize: 0,
+                    tickPadding: 10,
                     tickRotation: 0,
-                    legend: "월별 모의평가",
+                    legend: "",
                     legendPosition: "middle",
                     legendOffset: 32,
                 }}
                 axisLeft={{
-                    tickSize: 5,
-                    tickPadding: 5,
+                    tickSize: 0,
+                    tickPadding: 10,
                     tickRotation: 0,
-                    legend: "점수",
+                    legend: "",
                     legendPosition: "middle",
                     legendOffset: -40,
                 }}
@@ -142,31 +140,7 @@ const MonthlyChangeScore = () => {
                     from: "color",
                     modifiers: [["darker", 1.6]],
                 }}
-                // legends={[]}
-                legends={[
-                    {
-                        dataFrom: "keys",
-                        anchor: "bottom-right",
-                        direction: "column",
-                        justify: false,
-                        translateX: 120,
-                        translateY: 0,
-                        itemsSpacing: 2,
-                        itemWidth: 100,
-                        itemHeight: 20,
-                        itemDirection: "left-to-right",
-                        itemOpacity: 0.85,
-                        symbolSize: 20,
-                        effects: [
-                            {
-                                on: "hover",
-                                style: {
-                                    itemOpacity: 1,
-                                },
-                            },
-                        ],
-                    },
-                ]}
+                legends={[]}
                 role="application"
                 ariaLabel="Nivo bar chart demo"
                 barAriaLabel={function (e) {
