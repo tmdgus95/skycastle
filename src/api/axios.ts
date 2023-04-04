@@ -15,6 +15,7 @@ export const HeaderInstance = axios.create({
 HeaderInstance.interceptors.request.use(
     (config) => {
         const accessToken = window.localStorage.getItem("token");
+        const refreshToken = window.localStorage.getItem("token2");
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
@@ -24,3 +25,24 @@ HeaderInstance.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+
+setInterval(() => {
+    const accessTokenExp = window.localStorage.getItem("exp");
+    if (accessTokenExp && new Date(accessTokenExp) < new Date()) {
+        const refreshToken = window.localStorage.getItem("token2");
+        const body = { refresh: refreshToken };
+        HeaderInstance.post("/api/member/refresh", body)
+            .then((res) => {
+                const { token } = res.data;
+                window.localStorage.setItem("token", token);
+                window.localStorage.setItem(
+                    "exp",
+
+                    new Date(Date.now() + 3600 * 1000).toString()
+                );
+            })
+            .catch((error) => {
+                console.error("refresh token error: ", error);
+            });
+    }
+}, 1000 * 60 * 5);

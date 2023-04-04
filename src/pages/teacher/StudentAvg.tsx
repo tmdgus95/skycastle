@@ -140,9 +140,10 @@ const StudentAvg = () => {
         />
       </SearchStyle>
       <TeacherTitle>
-        <FaBell />
-        &nbsp;<b>{defaultStudent.name}</b>&nbsp;학생, 현재 "{weeknessSubject}"
-        취약 과목입니다.
+        <FaBell style={{ color: "#fcc53b" }} />
+        &nbsp;<b>{defaultStudent.name}</b>&nbsp;학생, 현재
+        <b style={{ color: "firebrick" }}>&nbsp;"{weeknessSubject}"</b>
+        &nbsp;취약 과목입니다.
       </TeacherTitle>
       <TeacherChart>
         <Inner>

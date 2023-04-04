@@ -40,7 +40,7 @@ const ThisMonthScore = () => {
 
     return (
         <>
-            <p>&#8226; 이번달 내 점수</p>
+            <p>&#8226; <b>이번달</b> 내 점수</p>
             <ResponsiveRadar
                 data={scoreLists}
                 keys={["grade"]}

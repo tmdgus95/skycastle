@@ -5,22 +5,23 @@ import TabMenu from "../../components/TabMenu";
 import Button from "../../components/UI/Button";
 import { FormEvent, FormEventSubmit } from "../Login";
 
+const INITDATA = {
+    id: "",
+    pwd: "",
+    name: "",
+    birth: "",
+    email: "",
+    regDt: "",
+    grade: "", //
+    shcool: "",
+    subject: "", //
+    position: "",
+    department: "",
+    exp: "",
+    classroom: "", //
+};
 const CreateUser = () => {
-    const [createUser, setCreateUser] = useState({
-        id: "",
-        pwd: "",
-        name: "",
-        birth: "",
-        email: "",
-        regDt: "",
-        grade: 1,
-        shcool: "",
-        subject: 1,
-        position: "",
-        department: "",
-        exp: "",
-        classroom: 1,
-    });
+    const [createUser, setCreateUser] = useState(INITDATA);
     const [creatUserId, setCreatUserId] = useState("student");
 
     const handelChange = (e: FormEvent) => {
@@ -55,6 +56,7 @@ const CreateUser = () => {
             .then((res) => {
                 console.log(res);
                 alert("계정생성이 완료되었습니다.");
+                setCreateUser(INITDATA);
             })
             .catch((err) => console.log(err));
     };
@@ -88,31 +90,37 @@ const CreateUser = () => {
                                 <input
                                     type="text"
                                     name="id"
+                                    value={createUser.id}
                                     onChange={handelChange}
                                 />
                                 <input
                                     type="text"
                                     name="pwd"
+                                    value={createUser.pwd}
                                     onChange={handelChange}
                                 />
                                 <input
                                     type="text"
                                     name="name"
+                                    value={createUser.name}
                                     onChange={handelChange}
                                 />
                                 <input
                                     type="text"
                                     name="birth"
+                                    value={createUser.birth}
                                     onChange={handelChange}
                                 />
                                 <input
                                     type="text"
                                     name="email"
+                                    value={createUser.email}
                                     onChange={handelChange}
                                 />
                                 <input
                                     type="text"
                                     name="regDt"
+                                    value={createUser.regDt}
                                     onChange={handelChange}
                                 />
                             </div>
@@ -131,16 +139,19 @@ const CreateUser = () => {
                                     <input
                                         type="text"
                                         name="grade"
+                                        value={createUser.grade}
                                         onChange={handelChange}
                                     />
                                     <input
                                         type="text"
                                         name="shcool"
+                                        value={createUser.shcool}
                                         onChange={handelChange}
                                     />
                                     <input
                                         type="text"
                                         name="classroom"
+                                        value={createUser.classroom}
                                         onChange={handelChange}
                                     />
                                 </div>
@@ -160,16 +171,19 @@ const CreateUser = () => {
                                     <input
                                         type="text"
                                         name="subject"
+                                        value={createUser.subject}
                                         onChange={handelChange}
                                     />
                                     <input
                                         type="text"
                                         name="classroom"
+                                        value={createUser.classroom}
                                         onChange={handelChange}
                                     />
                                     <input
                                         type="text"
                                         name="exp"
+                                        value={createUser.exp}
                                         onChange={handelChange}
                                     />
                                 </div>
@@ -189,16 +203,19 @@ const CreateUser = () => {
                                     <input
                                         type="text"
                                         name="position"
+                                        value={createUser.position}
                                         onChange={handelChange}
                                     />
                                     <input
                                         type="text"
                                         name="department"
+                                        value={createUser.department}
                                         onChange={handelChange}
                                     />
                                     <input
                                         type="text"
                                         name="exp"
+                                        value={createUser.exp}
                                         onChange={handelChange}
                                     />
                                 </div>

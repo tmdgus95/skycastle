@@ -32,6 +32,9 @@ export const Analysis = styled.div`
     padding-left: 3%;
     padding-right: 5%;
     font-size: 22px;
+    p {
+        padding-left: 1%;
+    }
 `;
 
 // Gradelist.tsx

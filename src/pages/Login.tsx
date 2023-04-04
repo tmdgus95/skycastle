@@ -26,13 +26,17 @@ const Login = () => {
         try {
             const res = await LoginInstance.post("/api/member/login", body);
             console.log("로그인 응답", res);
+            const refreshToken = res.data.token.refreshToken;
             const accessToken = res.data.token.accessToken;
             const role = res.data.role;
             const name = res.data.name;
+            const expirationTime = new Date().getTime() + 60 * 60 * 1000;
 
             window.localStorage.setItem("token", accessToken);
+            window.localStorage.setItem("token2", refreshToken);
             window.localStorage.setItem("role", role);
             window.localStorage.setItem("name", name);
+            window.localStorage.setItem("exp", expirationTime.toString());
 
             if (res.data.role === "MASTER") {
                 navigate("/master/create");
@@ -79,6 +83,7 @@ const Login = () => {
                     <button onClick={() => navigate("/findid")}>
                         아이디 찾기
                     </button>
+
                     <button onClick={() => navigate("/findpassword")}>
                         비밀번호 찾기
                     </button>

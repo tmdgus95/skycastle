@@ -28,7 +28,7 @@ const FeedbackWriteEdit = () => {
     // console.log(text);
     // console.log(new Date());
 
-    const [studentId, setStudentId] = useState("");
+    const [studentId] = useState("");
     console.log(1, studentId);
 
     const fiSeq = location.state.data;

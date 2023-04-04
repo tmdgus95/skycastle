@@ -77,6 +77,7 @@ const FindId = () => {
                     <button onClick={() => navigate("/findpassword")}>
                         비밀번호 찾기
                     </button>
+                    <button onClick={() => navigate("/")}>홈으로</button>
                 </div>
                 {modal && (
                     <Find

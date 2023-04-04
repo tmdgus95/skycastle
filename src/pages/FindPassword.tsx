@@ -31,7 +31,10 @@ const FindPassword = () => {
                 console.log(res);
                 setModal(true);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                alert("아이디, 이름, 이메일을 다시 확인해 주세요");
+                console.log(err);
+            });
     };
     console.log(findPwd);
 
@@ -74,6 +77,7 @@ const FindPassword = () => {
                     <button onClick={() => navigate("/findid")}>
                         아이디 찾기
                     </button>
+                    <button onClick={() => navigate("/")}>홈으로</button>
                 </div>
                 {modal && (
                     <Find

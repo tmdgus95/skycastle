@@ -30,14 +30,23 @@ const Header = () => {
                 <span>
                     <BsFillPersonFill />
                 </span>
-                {name ? <span>{name}님</span> : <span>이름이 없습니다.</span>}
+                {name ? (
+                    <span>
+                        {name}님{" "}
+                        <span style={{ fontSize: "18px" }}>{role}</span>
+                    </span>
+                ) : (
+                    <span>이름이 없습니다.</span>
+                )}
             </div>
 
             <div>
                 {role === "MASTER" || (
                     <button onClick={handleMypage}>마이페이지</button>
                 )}
-                <button onClick={handleLogout}>로그아웃</button>
+                <button id="logout" onClick={handleLogout}>
+                    로그아웃
+                </button>
             </div>
         </HeaderContainer>
     );
