@@ -16,6 +16,7 @@ interface DataType {
 }
 
 const FeedBack: React.FC = () => {
+    const role = window.localStorage.getItem("role");
     const columns: ColumnsType<DataType> = [
         {
             title: "글번호",
@@ -159,9 +160,11 @@ const FeedBack: React.FC = () => {
                         marginTop: "50px",
                     }}
                 >
-                    <Link to="/teacher/feedback/write">
-                        <Button title="등록" />
-                    </Link>
+                    {role === "TEACHER" && (
+                        <Link to={"/teacher/feedback/write"}>
+                            <Button title="등록" />
+                        </Link>
+                    )}
                 </div>
             </Wrap>
         </>
