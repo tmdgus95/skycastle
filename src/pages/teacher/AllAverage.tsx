@@ -151,11 +151,11 @@ const AllAverage = () => {
           <div className="tChart-title">
             <p>
               <span className="tChart-line text-[#FF9F4A]">-</span>
-              &nbsp;상위 10% 평균 점수
+              &nbsp;최근 상위 10% 평균 점수
             </p>
             <p>
               <span className="tChart-line text-[#5799C7]">-</span>
-              &nbsp;학생 전체 평균 점수
+              &nbsp;최근 학생 전체 평균 점수
             </p>
           </div>
           <ResponsiveLine
@@ -199,7 +199,7 @@ const AllAverage = () => {
               allowClear={false}
               onChange={onChange}
             />
-            반 평균 점수
+            &nbsp;반 평균 점수
           </DateCss>
           {classData ? (
             <ResponsiveBar

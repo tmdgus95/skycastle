@@ -177,7 +177,7 @@ const StudentAvg = () => {
             maxValue={400}
             valueScale={{ type: "linear" }}
             indexScale={{ type: "band", round: true }}
-            colors={{ scheme: "nivo" }}
+            colors={{ scheme: "paired" }}
             borderColor={{
               from: "color",
               modifiers: [["darker", 1.6]],
