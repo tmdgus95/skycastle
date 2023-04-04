@@ -32,11 +32,17 @@ const Header = () => {
         ) : (
             <RiVipCrown2Fill />
         );
+    const IconStyle =
+        role === "STUDENT"
+            ? "text-blue-400"
+            : role === "TEACHER"
+            ? "text-red-600"
+            : "text-orange-400";
     return (
         <HeaderContainer>
             <div>
                 <span>환영합니다</span>
-                <span>{ICON}</span>
+                <span className={IconStyle}>{ICON}</span>
                 {name ? (
                     <span>
                         {name}님{" "}
