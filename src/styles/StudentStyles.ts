@@ -20,6 +20,7 @@ export const Inner = styled.div`
     height: 500px;
     border: 1px solid ${(props) => props.theme.colors.mainColor};
     border-radius: 20px;
+    background: #fff;
     p {
         position: absolute;
         left: 5%;

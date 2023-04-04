@@ -188,6 +188,7 @@ export const TInner = styled.div`
   height: 500px;
   border: 1px solid ${(props) => props.theme.colors.mainColor};
   border-radius: 20px;
+  background: #fff;
   .tChart-title {
     position: absolute;
     left: 5%;
