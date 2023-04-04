@@ -126,10 +126,10 @@ const AllAverage = () => {
       const { scoreList, className } = item;
 
       // scoreList가 null인 경우 모든 점수를 0으로 처리
-      const 독해 = scoreList ? scoreList.독해 : 0;
-      const 듣기 = scoreList ? scoreList.듣기 : 0;
-      const 문법 = scoreList ? scoreList.문법 : 0;
-      const 어휘 = scoreList ? scoreList.어휘 : 0;
+      const 독해 = scoreList ? Math.round(scoreList.독해) : 0;
+      const 듣기 = scoreList ? Math.round(scoreList.듣기) : 0;
+      const 문법 = scoreList ? Math.round(scoreList.문법) : 0;
+      const 어휘 = scoreList ? Math.round(scoreList.어휘) : 0;
 
       return {
         class: className,
