@@ -4,6 +4,7 @@ import { SideBarContainer } from "../styles/Styles";
 import {
   AiOutlineArrowsAlt,
   AiOutlineEdit,
+  AiOutlineFundView,
   AiOutlineIdcard,
   AiOutlineMinusSquare,
   AiOutlinePieChart,
@@ -21,7 +22,10 @@ const SideBar = () => {
       {role === "STUDENT" && (
         <Menu className="sidebar-menu">
           <Menu.Item key="menu-1">
-            <Link to="/student/gradelist">성적 조회</Link>
+            <Link to="/student/gradelist">
+              <AiOutlineFundView />
+              &nbsp; 성적 조회
+            </Link>
           </Menu.Item>
           <Menu.Item key="menu-2">
             <Link to="/student/myaverage">
