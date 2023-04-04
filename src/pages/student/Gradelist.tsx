@@ -61,20 +61,20 @@ const columns: ColumnsType<DataType> = [
         key: "class",
         filters: [
             {
-                text: "A반",
-                value: "A반",
+                text: "A",
+                value: "A",
             },
             {
-                text: "B반",
-                value: "B반",
+                text: "B",
+                value: "B",
             },
             {
-                text: "C반",
-                value: "C반",
+                text: "C",
+                value: "C",
             },
             {
-                text: "D반",
-                value: "D반",
+                text: "D",
+                value: "D",
             },
         ],
         onFilter: (value, record) =>
@@ -138,7 +138,6 @@ const Gradelist = () => {
             <MonthlyGradeList>
                 <DatePicker picker="month" bordered={false} />
                 <Table
-                    className="t-grade"
                     bordered
                     columns={columns}
                     dataSource={scoreLists2}
