@@ -58,7 +58,15 @@ const CreateUser = () => {
                 alert("계정생성이 완료되었습니다.");
                 setCreateUser(INITDATA);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                if (
+                    err.response.data.err[0] === "이미 사용중인 이메일입니다."
+                ) {
+                    alert(err.response.data.err[0]);
+                } else {
+                    console.log(err);
+                }
+            });
     };
 
     return (
