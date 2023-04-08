@@ -119,7 +119,7 @@ export default function ChangeClass() {
                     setModal(!modal);
                 }}
             >
-                반 병경
+                반 변경
             </button>
             <div>
                 <a
